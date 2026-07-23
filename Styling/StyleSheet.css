@@ -12,7 +12,10 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #38444d;
+ width: 200px;
+ height: 1000px;
+  background-color: #036a74;
+  font-family: tahoma;
 }
 
 li {
@@ -28,7 +31,9 @@ li a, .dropbtn {
 }
 
 li a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: wheat;
+   width: 175px;
+   text-align: center;
 }
 
 li.dropdown {
