@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing Dashboard</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+   
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Fashion Design Management</span>
+        </div>
+      </li>
+     
+      <li><a href="Homepage.html">Dashboard</a></li>
+      <li><a href="CustomerManagement.html">Customer Management</a></li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Order Management</a>
+        <div class="dropdown-content">
+          <a href="CreateOrder.html">Create Order</a>
+          <a href="UpdateOrder.html">Update Status</a>
+          <a href="RecordMeasurements.html">Record Measurements</a>
+        </div>
+      </li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
+        <div class="dropdown-content">
+          <a href="ProcessPayment.html">Process Payment</a>
+          <a href="Invoices.html">Invoices</a>
+        </div>
+      </li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
+        <div class="dropdown-content">
+          <a href="AddItems.html">Add Item</a>
+          <a href="UpdateStock.html">Update Stock</a>
+          <a href="LowStock.html">Low Stock Alerts</a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Reports</a>
+        <div class="dropdown-content">
+          <a href="SalesReport.html">Sales</a>
+          <a href="InventoryReport.html">Inventory</a>
+          <a href="CustomerOrderReport.html">Customer Orders</a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Administration</a>
+        <div class="dropdown-content">
+          <a href="ManageUsers.html">Manage Users</a>
+          <a href="BackupDatabase.html">Backup Database</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="main-content">
+     
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Stock Levels</h2>
+          <p>Wednesday, 13 May 2026</p>
+        </div>
+       
+        <div class="header-right">
+          <div class="profile-info">
+            <img src="../Images/user.png" alt="Profile" class="profile-icon">
+            <div class="profile-text">
+              <span class="profile-name">Fashion Designer</span>
+              <span class="profile-role">Administrator</span>
+            </div>
+          </div>
+          <button class="logout-btn">Logout</button>
+        </div>
+      </header>
+
+      <main class="dashboard-body">
+      </main>
+     
+    </div>
+  </div>
+</body>
+</html>
