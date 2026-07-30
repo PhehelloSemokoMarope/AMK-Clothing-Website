@@ -88,9 +88,72 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Create New Order</h2>
+          <p>Fill in the details below to create a new client order</p>
+        </div>
+
+        <div class="table-container">
+          <form id="create-order-form">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Customer Name *</label>
+                <input type="text" id="order-customer" placeholder="Enter customer name" required>
+              </div>
+              <div class="input-group">
+                <label>Order Date *</label>
+                <input type="date" id="order-date" required>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-group">
+                <label>Garment Description / Item *</label>
+                <input type="text" id="order-item" placeholder="e.g. Traditional Dress, Suit, etc." required>
+              </div>
+              <div class="input-group">
+                <label>Total Amount (R) *</label>
+                <input type="number" id="order-amount" placeholder="e.g. 2500" required>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-group">
+                <label>Status *</label>
+                <select id="order-status" required>
+                  <option value="" disabled selected>Select status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="In-progress">In-progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions" style="margin-top: 25px; display: flex; gap: 15px;">
+              <button type="submit" class="btn-primary">Save Order</button>
+              <button type="reset" class="btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const orderForm = document.getElementById('create-order-form');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    orderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Order successfully created!');
+        orderForm.reset();
+    });
+  </script>
 </body>
 </html>

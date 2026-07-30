@@ -1,96 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing Dashboard</title>
-  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing Dashboard</title>
+    <link rel="stylesheet" href="../Styling/StyleSheet.css">
 </head>
 <body>
-  <div class="dashboard-wrapper">
-   
-    <ul>
-      <li class="sidebar">
-        <div class="icon-box">
-          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
-        </div>
-        <div class="AMK-text">
-          <span class="AMK-title">FDMS</span>
-          <span class="AMK-subtitle">Fashion Design Management</span>
-        </div>
-      </li>
-     
-      <li><a href="Homepage.html">Dashboard</a></li>
-      <li><a href="CustomerManagement.html">Customer Management</a></li>
-     
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Order Management</a>
-        <div class="dropdown-content">
-          <a href="CreateOrder.html">Create Order</a>
-          <a href="UpdateOrder.html">Update Status</a>
-          <a href="RecordMeasurements.html">Record Measurements</a>
-        </div>
-      </li>
-     
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
-        <div class="dropdown-content">
-          <a href="ProcessPayment.html">Process Payment</a>
-          <a href="Invoices.html">Invoices</a>
-        </div>
-      </li>
-     
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
-        <div class="dropdown-content">
-          <a href="AddItems.html">Add Item</a>
-          <a href="UpdateStock.html">Update Stock</a>
-          <a href="LowStock.html">Low Stock Alerts</a>
-        </div>
-      </li>
+    <div class="dashboard-wrapper">
+        
+        <ul>
+            <li class="sidebar">
+                <div class="icon-box">
+                    <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+                </div>
+                <div class="AMK-text">
+                    <span class="AMK-title">FDMS</span>
+                    <span class="AMK-subtitle">Fashion Design Management</span>
+                </div>
+            </li>
+            
+            <li><a href="Homepage.html">Dashboard</a></li>
+            <li><a href="CustomerManagement.html">Customer Management</a></li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Order Management</a>
+                <div class="dropdown-content">
+                    <a href="CreateOrder.html">Create Order</a>
+                    <a href="UpdateOrder.html">Update Status</a>
+                    <a href="RecordMeasurements.html">Record Measurements</a>
+                </div>
+            </li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
+                <div class="dropdown-content">
+                    <a href="ProcessPayment.html">Process Payment</a>
+                    <a href="Invoices.html">Invoices</a>
+                </div>
+            </li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
+                <div class="dropdown-content">
+                    <a href="AddItems.html">Add Item</a>
+                    <a href="UpdateStock.html">Update Stock</a>
+                    <a href="LowStock.html">Low Stock Alerts</a>
+                </div>
+            </li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Reports</a>
+                <div class="dropdown-content">
+                    <a href="SalesReport.html">Sales</a>
+                    <a href="InventoryReport.html">Inventory</a>
+                    <a href="CustomerOrderReport.html">Customer Orders</a>
+                </div>
+            </li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Administration</a>
+                <div class="dropdown-content">
+                    <a href="ManageUsers.html">Manage Users</a>
+                    <a href="BackupDatabase.html">Backup Database</a>
+                </div>
+            </li>
+        </ul>
 
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Reports</a>
-        <div class="dropdown-content">
-          <a href="SalesReport.html">Sales</a>
-          <a href="InventoryReport.html">Inventory</a>
-          <a href="CustomerOrderReport.html">Customer Orders</a>
-        </div>
-      </li>
+        <div class="main-content">
+            
+            <header class="top-header">
+                <div class="header-left">
+                    <h2>Dashboard</h2>
+                    <p>Wednesday, 13 May 2026</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="profile-info">
+                        <img src="../Images/user.png" alt="Profile" class="profile-icon">
+                        <div class="profile-text">
+                            <span class="profile-name">Fashion Designer</span>
+                            <span class="profile-role">Administrator</span>
+                        </div>
+                    </div>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </header>
 
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Administration</a>
-        <div class="dropdown-content">
-          <a href="ManageUsers.html">Manage Users</a>
-          <a href="BackupDatabase.html">Backup Database</a>
-        </div>
-      </li>
-    </ul>
-
-    <div class="main-content">
-     
-      <header class="top-header">
-        <div class="header-left">
-          <h2>Add Items</h2>
-          <p>Wednesday, 13 May 2026</p>
-        </div>
-       
-        <div class="header-right">
-          <div class="profile-info">
-            <img src="../Images/user.png" alt="Profile" class="profile-icon">
-            <div class="profile-text">
-              <span class="profile-name">Fashion Designer</span>
-              <span class="profile-role">Administrator</span>
-            </div>
-          </div>
-          <button class="logout-btn">Logout</button>
-        </div>
-      </header>
-
-      <main class="dashboard-body">
-      </main>
-     
+            <main class="dashboard-body">
+              <div class="welcome-banner">
+    <div class="banner-content">
+        <h2 id="welcome-message">Welcome back, Fashion Designer!</h2>
+        <p>Here's a quick overview of your fashion design studio today.</p>
     </div>
-  </div>
+    <div class="banner-icon">
+        <img src="../Images/scissors.png" alt="Scissors" style="width: 30px; filter: brightness(0) invert(1);">
+    </div>
+</div>
+
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-header">
+            <span class="metric-title">TOTAL ORDERS</span>
+            <span class="metric-icon" style="color: #2b7a78; background: #e0f2f1; padding: 8px; border-radius: 8px;">🛍️</span>
+        </div>
+        <div class="metric-value" id="total-orders-count">0</div>
+        <div class="metric-trend" style="color: #2b7a78;" id="total-orders-trend">Loading...</div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-header">
+            <span class="metric-title">PENDING PAYMENTS</span>
+            <span class="metric-icon" style="color: #f57c00; background: #fff3e0; padding: 8px; border-radius: 8px;">💳</span>
+        </div>
+        <div class="metric-value" id="pending-payments-total">R0</div>
+        <div class="metric-trend" style="color: #f57c00;" id="pending-payments-trend">Loading...</div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-header">
+            <span class="metric-title">ACTIVE CUSTOMERS</span>
+            <span class="metric-icon" style="color: #1976d2; background: #e3f2fd; padding: 8px; border-radius: 8px;">👥</span>
+        </div>
+        <div class="metric-value" id="active-customers-count">0</div>
+        <div class="metric-trend" style="color: #2b7a78;" id="active-customers-trend">Loading...</div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-header">
+            <span class="metric-title">LOW STOCK ITEMS</span>
+            <span class="metric-icon" style="color: #d32f2f; background: #ffebee; padding: 8px; border-radius: 8px;">⚠️</span>
+        </div>
+        <div class="metric-value" style="color: #1a1a1a;" id="low-stock-count">0</div>
+        <div class="metric-trend" style="color: #d32f2f;" id="low-stock-trend">Loading...</div>
+    </div>
+</div>
+
+<div class="table-container">
+    <div class="table-header">
+        <h3>Recent Orders</h3>
+        <p style="font-size: 0.85rem; color: #777; margin-top: 5px;">Latest orders overview</p>
+        <button class="btn-secondary" style="margin-left: auto;">View All</button>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ORDER ID</th>
+                <th>CUSTOMER</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+                <th>AMOUNT</th>
+            </tr>
+        </thead>
+        <tbody id="recent-orders-body">
+        </tbody>
+    </table>
+</div> 
+            </main>
+
+        </div>
+    </div>
+
+<script>
+        const logoutBtn = document.querySelector('.logout-btn');
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                window.location.replace('SignIn.html');
+            });
+        }
+    </script>
 </body>
 </html>

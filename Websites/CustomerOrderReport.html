@@ -71,7 +71,7 @@
      
       <header class="top-header">
         <div class="header-left">
-          <h2>Customer Order Report</h2>
+          <h2>Customer Orders Report</h2>
           <p>Wednesday, 13 May 2026</p>
         </div>
        
@@ -88,9 +88,63 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Customer Orders Report</h2>
+          <p id="cust-report-count">0 customer order records</p>
+        </div>
+
+        <div class="table-container">
+          <div class="toolbar">
+            <input type="text" class="search-bar" id="search-input" placeholder="Search customer orders...">
+            <button class="btn-primary" id="export-cust-btn">Export Report</button>
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ORDER ID</th>
+                <th>CUSTOMER</th>
+                <th>DATE</th>
+                <th>GARMENT</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="cust-report-table-body">
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const custTableBody = document.getElementById('cust-report-table-body');
+    const custReportCount = document.getElementById('cust-report-count');
+    const exportCustBtn = document.getElementById('export-cust-btn');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    if (exportCustBtn) {
+        exportCustBtn.addEventListener('click', function() {
+            alert('Customer orders report exported successfully!');
+        });
+    }
+
+    custTableBody.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+            const row = e.target.closest('tr');
+            row.remove();
+            
+            const currentCount = parseInt(custReportCount.textContent) || 1;
+            custReportCount.textContent = `${Math.max(0, currentCount - 1)} customer order records`;
+        }
+    });
+  </script>
 </body>
 </html>

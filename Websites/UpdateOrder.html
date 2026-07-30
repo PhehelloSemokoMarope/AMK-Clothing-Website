@@ -71,7 +71,7 @@
      
       <header class="top-header">
         <div class="header-left">
-          <h2>Update Order</h2>
+          <h2>Update Status</h2>
           <p>Wednesday, 13 May 2026</p>
         </div>
        
@@ -88,9 +88,54 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Update Order Status</h2>
+          <p>Modify the current status of existing client orders</p>
+        </div>
+
+        <div class="table-container">
+          <form id="update-status-form">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Order ID *</label>
+                <input type="text" id="update-order-id" placeholder="e.g. Order #101" required>
+              </div>
+              <div class="input-group">
+                <label>New Status *</label>
+                <select id="update-order-status" required>
+                  <option value="" disabled selected>Select new status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="In-progress">In-progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions" style="margin-top: 25px; display: flex; gap: 15px;">
+              <button type="submit" class="btn-primary">Update Status</button>
+              <button type="reset" class="btn-secondary">Clear Form</button>
+            </div>
+          </form>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const updateForm = document.getElementById('update-status-form');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    updateForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Order status successfully updated!');
+        updateForm.reset();
+    });
+  </script>
 </body>
 </html>

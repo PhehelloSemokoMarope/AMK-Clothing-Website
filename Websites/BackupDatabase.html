@@ -71,8 +71,8 @@
      
       <header class="top-header">
         <div class="header-left">
-          <h2>Back-Up Database</h2>
-          <p>Wednesday, 13 May 2026</p>
+          <h2>Backup Database</h2>
+          <p>Manually backup the FDMS database or view backup history.</p>
         </div>
        
         <div class="header-right">
@@ -88,9 +88,173 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="table-container" style="display: flex; align-items: center; justify-content: space-between; padding: 25px 30px; margin-bottom: 25px;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="background-color: #e3f2fd; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 1.8rem;">🗄️</span>
+            </div>
+            <div>
+              <h3 style="font-size: 1.1rem; color: #1a1a1a; margin-bottom: 4px;">FDMS Production Database</h3>
+              <p id="last-backup-text" style="color: #666; font-size: 0.9rem;">Last backup: 10 May 2026 at 02:00 AM — 4.2 MB</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 25px;">
+            <span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;">🟢 Healthy</span>
+            <button class="btn-primary" id="run-backup-btn" style="background-color: #00796b; padding: 12px 24px;">📥 Run Backup Now</button>
+          </div>
+        </div>
+
+        <div id="progress-container" class="table-container" style="display: none; padding: 25px 30px; margin-bottom: 25px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span id="progress-status-text" style="font-weight: 600; color: #333;">Backup in progress...</span>
+            <span id="progress-percent" style="font-weight: 600; color: #00796b;">0%</span>
+          </div>
+          <div style="width: 100%; background-color: #e0e0e0; border-radius: 8px; height: 10px; overflow: hidden; margin-bottom: 10px;">
+            <div id="progress-bar" style="width: 0%; background-color: #00796b; height: 100%; transition: width 0.2s ease;"></div>
+          </div>
+          <p id="progress-subtext" style="color: #666; font-size: 0.85rem; margin: 0;">Compressing files...</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 25px;">
+          <div class="table-container" style="display: flex; align-items: center; gap: 20px; padding: 20px 25px; margin: 0;">
+            <span style="font-size: 1.8rem;">⏰</span>
+            <div>
+              <span style="font-size: 0.75rem; color: #888; font-weight: 700; letter-spacing: 0.5px;">BACKUP SCHEDULE</span>
+              <p style="color: #1a1a1a; font-weight: 600; margin-top: 2px;">Daily at 02:00 AM</p>
+            </div>
+          </div>
+          <div class="table-container" style="display: flex; align-items: center; gap: 20px; padding: 20px 25px; margin: 0;">
+            <span style="font-size: 1.8rem;">📦</span>
+            <div>
+              <span style="font-size: 0.75rem; color: #888; font-weight: 700; letter-spacing: 0.5px;">RETENTION POLICY</span>
+              <p style="color: #1a1a1a; font-weight: 600; margin-top: 2px;">Keep last 30 backups</p>
+            </div>
+          </div>
+          <div class="table-container" style="display: flex; align-items: center; gap: 20px; padding: 20px 25px; margin: 0;">
+            <span style="font-size: 1.8rem;">☁️</span>
+            <div>
+              <span style="font-size: 0.75rem; color: #888; font-weight: 700; letter-spacing: 0.5px;">STORAGE LOCATION</span>
+              <p style="color: #1a1a1a; font-weight: 600; margin-top: 2px;">Local Server + Cloud</p>
+            </div>
+          </div>
+          <div class="table-container" style="display: flex; align-items: center; gap: 20px; padding: 20px 25px; margin: 0;">
+            <span style="font-size: 1.8rem;">🔒</span>
+            <div>
+              <span style="font-size: 0.75rem; color: #888; font-weight: 700; letter-spacing: 0.5px;">ENCRYPTION</span>
+              <p style="color: #1a1a1a; font-weight: 600; margin-top: 2px;">AES-256 Enabled</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <div class="page-header-text" style="margin-bottom: 20px;">
+            <h3 style="font-size: 1.1rem; color: #1a1a1a;">Backup History</h3>
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>DATE</th>
+                <th>TIME</th>
+                <th>FILE SIZE</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="backup-table-body">
+              <tr>
+                <td style="color: #888;">#004</td>
+                <td>10 May 2026</td>
+                <td>02:00 AM</td>
+                <td>4.2 MB</td>
+                <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
+              </tr>
+              <tr>
+                <td style="color: #888;">#003</td>
+                <td>07 May 2026</td>
+                <td>02:00 AM</td>
+                <td>3.9 MB</td>
+                <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
+              </tr>
+              <tr>
+                <td style="color: #888;">#002</td>
+                <td>04 May 2026</td>
+                <td>02:00 AM</td>
+                <td>3.7 MB</td>
+                <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
+              </tr>
+              <tr>
+                <td style="color: #888;">#001</td>
+                <td>01 May 2026</td>
+                <td>02:00 AM</td>
+                <td>3.5 MB</td>
+                <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const runBackupBtn = document.getElementById('run-backup-btn');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
+    const progressSubtext = document.getElementById('progress-subtext');
+    const lastBackupText = document.getElementById('last-backup-text');
+    const tableBody = document.getElementById('backup-table-body');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    if (runBackupBtn) {
+        runBackupBtn.addEventListener('click', function() {
+            runBackupBtn.disabled = true;
+            runBackupBtn.textContent = 'Backing up...';
+            progressContainer.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = progress + '%';
+
+                if (progress === 40) {
+                    progressSubtext.textContent = 'Encrypting database archive...';
+                } else if (progress === 80) {
+                    progressSubtext.textContent = 'Uploading to cloud storage...';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressContainer.style.display = 'none';
+                    runBackupBtn.disabled = false;
+                    runBackupBtn.textContent = '📥 Run Backup Now';
+
+                    const now = new Date();
+                    const dateStr = '30 Jul 2026';
+                    const timeStr = '11:03 AM';
+                    lastBackupText.textContent = `Last backup: ${dateStr} at ${timeStr} — 4.5 MB`;
+
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td style="color: #888;">#005</td>
+                        <td>${dateStr}</td>
+                        <td>${timeStr}</td>
+                        <td>4.5 MB</td>
+                        <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
+                    `;
+                    tableBody.insertBefore(newRow, tableBody.firstChild);
+                }
+            }, 200);
+        });
+    }
+  </script>
 </body>
 </html>

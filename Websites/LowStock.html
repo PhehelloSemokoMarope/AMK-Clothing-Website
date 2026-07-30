@@ -71,7 +71,7 @@
      
       <header class="top-header">
         <div class="header-left">
-          <h2>Stock Levels</h2>
+          <h2>Low Stock Alerts</h2>
           <p>Wednesday, 13 May 2026</p>
         </div>
        
@@ -88,9 +88,55 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Low Stock Alerts</h2>
+          <p id="alert-count">0 low stock items requiring attention</p>
+        </div>
+
+        <div class="table-container">
+          <div class="toolbar">
+            <input type="text" class="search-bar" id="search-input" placeholder="Search low stock items...">
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ITEM ID</th>
+                <th>ITEM NAME</th>
+                <th>CATEGORY</th>
+                <th>CURRENT STOCK</th>
+                <th>THRESHOLD</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="alert-table-body">
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const tableBody = document.getElementById('alert-table-body');
+    const alertCount = document.getElementById('alert-count');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    tableBody.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+            const row = e.target.closest('tr');
+            row.remove();
+            
+            const currentCount = parseInt(alertCount.textContent) || 1;
+            alertCount.textContent = `${Math.max(0, currentCount - 1)} low stock items requiring attention`;
+        }
+    });
+  </script>
 </body>
 </html>

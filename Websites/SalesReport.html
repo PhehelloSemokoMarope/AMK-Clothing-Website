@@ -88,9 +88,63 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Sales Report</h2>
+          <p id="report-count">0 recorded sales entries</p>
+        </div>
+
+        <div class="table-container">
+          <div class="toolbar">
+            <input type="text" class="search-bar" id="search-input" placeholder="Search sales by order or client...">
+            <button class="btn-primary" id="export-sales-btn">Export Report</button>
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>TRANSACTION ID</th>
+                <th>CUSTOMER</th>
+                <th>DATE</th>
+                <th>GARMENT / ITEM</th>
+                <th>AMOUNT</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="sales-table-body">
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const tableBody = document.getElementById('sales-table-body');
+    const reportCount = document.getElementById('report-count');
+    const exportBtn = document.getElementById('export-sales-btn');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            alert('Sales report exported successfully!');
+        });
+    }
+
+    tableBody.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+            const row = e.target.closest('tr');
+            row.remove();
+            
+            const currentCount = parseInt(reportCount.textContent) || 1;
+            reportCount.textContent = `${Math.max(0, currentCount - 1)} recorded sales entries`;
+        }
+    });
+  </script>
 </body>
 </html>

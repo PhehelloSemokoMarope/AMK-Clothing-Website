@@ -88,9 +88,63 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Inventory Report</h2>
+          <p id="inv-report-count">0 inventory items tracked</p>
+        </div>
+
+        <div class="table-container">
+          <div class="toolbar">
+            <input type="text" class="search-bar" id="search-input" placeholder="Search inventory items...">
+            <button class="btn-primary" id="export-inv-btn">Export Report</button>
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ITEM ID</th>
+                <th>ITEM NAME</th>
+                <th>CATEGORY</th>
+                <th>QUANTITY</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="inv-report-table-body">
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <script>
+    const logoutBtn = document.querySelector('.logout-btn');
+    const invTableBody = document.getElementById('inv-report-table-body');
+    const invReportCount = document.getElementById('inv-report-count');
+    const exportInvBtn = document.getElementById('export-inv-btn');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    if (exportInvBtn) {
+        exportInvBtn.addEventListener('click', function() {
+            alert('Inventory report exported successfully!');
+        });
+    }
+
+    invTableBody.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+            const row = e.target.closest('tr');
+            row.remove();
+            
+            const currentCount = parseInt(invReportCount.textContent) || 1;
+            invReportCount.textContent = `${Math.max(0, currentCount - 1)} inventory items tracked`;
+        }
+    });
+  </script>
 </body>
 </html>

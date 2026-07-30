@@ -88,9 +88,136 @@
       </header>
 
       <main class="dashboard-body">
+        <div class="page-header-text">
+          <h2>Customer Management</h2>
+          <p id="customer-count">0 registered customers</p>
+        </div>
+
+        <div class="table-container">
+          <div class="toolbar">
+            <input type="text" class="search-bar" id="search-input" placeholder="Search customers by name or email...">
+            <button class="btn-primary" id="add-customer-btn">+ Add Customer</button>
+          </div>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>NAME</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>ORDERS</th>
+                <th>JOINED</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="customer-table-body">
+            </tbody>
+          </table>
+        </div>
       </main>
-     
     </div>
   </div>
+
+  <div id="customer-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3>Add New Customer</h3>
+            <button id="close-modal-btn" class="close-btn">&times;</button>
+        </div>
+        
+        <form id="add-customer-form">
+            <div class="input-group">
+                <label>Full Name *</label>
+                <input type="text" id="cust-name" placeholder="e.g. Thabo Mokoena" required>
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number *</label>
+                <input type="text" id="cust-phone" placeholder="e.g. 071 234 5678" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email Address *</label>
+                <input type="email" id="cust-email" placeholder="e.g. thabo@example.com" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Customer</button>
+                <button type="button" id="cancel-modal-btn" class="btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('customer-modal');
+    const addBtn = document.getElementById('add-customer-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const cancelBtn = document.getElementById('cancel-modal-btn');
+    const logoutBtn = document.querySelector('.logout-btn');
+    const form = document.getElementById('add-customer-form');
+    const tableBody = document.getElementById('customer-table-body');
+    const customerCount = document.getElementById('customer-count');
+
+    addBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.replace('index.html');
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('cust-name').value;
+        const phone = document.getElementById('cust-phone').value;
+        const email = document.getElementById('cust-email').value;
+        const initials = name.charAt(0).toUpperCase();
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><span class="avatar-circle">${initials}</span> ${name}</td>
+            <td>${phone}</td>
+            <td>${email}</td>
+            <td style="color: #2b7a78; font-weight: bold;">0</td>
+            <td>May 2026</td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn edit-btn">✏️</button>
+                    <button class="action-btn delete-btn">🗑️</button>
+                </div>
+            </td>
+        `;
+
+        tableBody.appendChild(newRow);
+
+        const currentCount = parseInt(customerCount.textContent) || 0;
+        customerCount.textContent = `${currentCount + 1} registered customers`;
+
+        form.reset();
+        modal.style.display = 'none';
+    });
+
+    tableBody.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+            const row = e.target.closest('tr');
+            row.remove();
+            
+            const currentCount = parseInt(customerCount.textContent) || 1;
+            customerCount.textContent = `${Math.max(0, currentCount - 1)} registered customers`;
+        }
+    });
+  </script>
 </body>
 </html>
