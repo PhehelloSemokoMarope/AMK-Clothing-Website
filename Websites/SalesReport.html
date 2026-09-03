@@ -118,33 +118,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const tableBody = document.getElementById('sales-table-body');
-    const reportCount = document.getElementById('report-count');
-    const exportBtn = document.getElementById('export-sales-btn');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    if (exportBtn) {
-        exportBtn.addEventListener('click', function() {
-            alert('Sales report exported successfully!');
-        });
-    }
-
-    tableBody.addEventListener('click', function(e) {
-        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
-            const row = e.target.closest('tr');
-            row.remove();
-            
-            const currentCount = parseInt(reportCount.textContent) || 1;
-            reportCount.textContent = `${Math.max(0, currentCount - 1)} recorded sales entries`;
-        }
-    });
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

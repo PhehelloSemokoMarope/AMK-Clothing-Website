@@ -133,21 +133,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const paymentForm = document.getElementById('process-payment-form');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    paymentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Payment successfully processed!');
-        paymentForm.reset();
-    });
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

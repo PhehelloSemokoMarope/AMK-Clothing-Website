@@ -138,21 +138,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const measurementsForm = document.getElementById('measurements-form');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    measurementsForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Measurements successfully saved!');
-        measurementsForm.reset();
-    });
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

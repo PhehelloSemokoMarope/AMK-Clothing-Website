@@ -97,9 +97,11 @@
           <form id="create-order-form">
             <div class="input-row">
               <div class="input-group">
-                <label>Customer Name *</label>
-                <input type="text" id="order-customer" placeholder="Enter customer name" required>
-              </div>
+    <label>Customer Name *</label>
+    <select id="order-customer" required>
+        <option value="" disabled selected>Select a customer...</option>
+        </select>
+</div>
               <div class="input-group">
                 <label>Order Date *</label>
                 <input type="date" id="order-date" required>
@@ -138,22 +140,6 @@
       </main>
     </div>
   </div>
-
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const orderForm = document.getElementById('create-order-form');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    orderForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Order successfully created!');
-        orderForm.reset();
-    });
-  </script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

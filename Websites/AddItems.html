@@ -92,57 +92,51 @@
     <h2>Add Inventory Item</h2>
     <p>Add a new item to the stock inventory.</p>
 </div>
-
 <div class="form-card">
-    <form>
-        
+    <form id="add-item-form">
         <div class="form-section">
             <h3>Item</h3>
-            
             <div class="input-group full-width">
                 <label>Item Name *</label>
-                <input type="text" placeholder="e.g. Ankara Fabric">
+                <input type="text" id="inv-item-name" placeholder="e.g. Ankara Fabric" required>
             </div>
-
             <div class="input-row">
                 <div class="input-group">
                     <label>Category *</label>
-                    <select>
-                        <option>Select category...</option>
-                        <option>Fabric</option>
-                        <option>Thread</option>
-                        <option>Accessories</option>
+                    <select id="inv-item-category" required>
+                        <option value="" disabled selected>Select category...</option>
+                        <option value="Fabric">Fabric</option>
+                        <option value="Thread">Thread</option>
+                        <option value="Accessories">Accessories</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>Supplier</label>
-                    <input type="text" placeholder="e.g. African Prints Co.">
+                    <input type="text" id="inv-item-supplier" placeholder="e.g. African Prints Co.">
                 </div>
             </div>
         </div>
 
         <div class="form-section">
             <h3>STOCK & PRICING</h3>
-            
             <div class="input-row">
                 <div class="input-group">
                     <label>Quantity *</label>
-                    <input type="number" placeholder="e.g. 50">
+                    <input type="number" id="inv-item-qty" placeholder="e.g. 50" required>
                 </div>
                 <div class="input-group">
                     <label>Unit</label>
-                    <input type="text" value="metres">
+                    <input type="text" id="inv-item-unit" value="metres">
                 </div>
             </div>
-
             <div class="input-row">
                 <div class="input-group">
                     <label>Reorder Level</label>
-                    <input type="number" placeholder="e.g. 10">
+                    <input type="number" id="inv-item-reorder" placeholder="e.g. 10">
                 </div>
                 <div class="input-group">
                     <label>Cost per Unit (R) *</label>
-                    <input type="number" placeholder="e.g. 85">
+                    <input type="number" id="inv-item-cost" placeholder="e.g. 85" required>
                 </div>
             </div>
         </div>
@@ -151,12 +145,13 @@
             <button type="submit" class="btn-primary">Add to Inventory</button>
             <button type="reset" class="btn-secondary">Clear</button>
         </div>
-
     </form>
 </div>
+
             </main>
 
         </div>
     </div>
+    <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

@@ -117,26 +117,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const tableBody = document.getElementById('alert-table-body');
-    const alertCount = document.getElementById('alert-count');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    tableBody.addEventListener('click', function(e) {
-        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
-            const row = e.target.closest('tr');
-            row.remove();
-            
-            const currentCount = parseInt(alertCount.textContent) || 1;
-            alertCount.textContent = `${Math.max(0, currentCount - 1)} low stock items requiring attention`;
-        }
-    });
-  </script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

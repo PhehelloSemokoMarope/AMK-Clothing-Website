@@ -118,33 +118,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const invTableBody = document.getElementById('inv-report-table-body');
-    const invReportCount = document.getElementById('inv-report-count');
-    const exportInvBtn = document.getElementById('export-inv-btn');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    if (exportInvBtn) {
-        exportInvBtn.addEventListener('click', function() {
-            alert('Inventory report exported successfully!');
-        });
-    }
-
-    invTableBody.addEventListener('click', function(e) {
-        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
-            const row = e.target.closest('tr');
-            row.remove();
-            
-            const currentCount = parseInt(invReportCount.textContent) || 1;
-            invReportCount.textContent = `${Math.max(0, currentCount - 1)} inventory items tracked`;
-        }
-    });
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

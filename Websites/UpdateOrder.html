@@ -121,21 +121,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const updateForm = document.getElementById('update-status-form');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    updateForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Order status successfully updated!');
-        updateForm.reset();
-    });
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

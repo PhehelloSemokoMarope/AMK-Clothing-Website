@@ -128,21 +128,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const stockForm = document.getElementById('update-stock-form');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    stockForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Stock successfully updated!');
-        stockForm.reset();
-    });
-  </script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

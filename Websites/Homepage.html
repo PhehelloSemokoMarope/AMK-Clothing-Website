@@ -102,7 +102,7 @@
     <div class="metric-card">
         <div class="metric-header">
             <span class="metric-title">TOTAL ORDERS</span>
-            <span class="metric-icon" style="color: #2b7a78; background: #e0f2f1; padding: 8px; border-radius: 8px;">🛍️</span>
+            <span class="metric-icon" style="color: #2b7a78; background: #e0f2f1; padding: 8px; border-radius: 8px;"></span>
         </div>
         <div class="metric-value" id="total-orders-count">0</div>
         <div class="metric-trend" style="color: #2b7a78;" id="total-orders-trend">Loading...</div>
@@ -111,7 +111,7 @@
     <div class="metric-card">
         <div class="metric-header">
             <span class="metric-title">PENDING PAYMENTS</span>
-            <span class="metric-icon" style="color: #f57c00; background: #fff3e0; padding: 8px; border-radius: 8px;">💳</span>
+            <span class="metric-icon" style="color: #f57c00; background: #fff3e0; padding: 8px; border-radius: 8px;"></span>
         </div>
         <div class="metric-value" id="pending-payments-total">R0</div>
         <div class="metric-trend" style="color: #f57c00;" id="pending-payments-trend">Loading...</div>
@@ -120,7 +120,7 @@
     <div class="metric-card">
         <div class="metric-header">
             <span class="metric-title">ACTIVE CUSTOMERS</span>
-            <span class="metric-icon" style="color: #1976d2; background: #e3f2fd; padding: 8px; border-radius: 8px;">👥</span>
+            <span class="metric-icon" style="color: #1976d2; background: #e3f2fd; padding: 8px; border-radius: 8px;"></span>
         </div>
         <div class="metric-value" id="active-customers-count">0</div>
         <div class="metric-trend" style="color: #2b7a78;" id="active-customers-trend">Loading...</div>
@@ -129,7 +129,7 @@
     <div class="metric-card">
         <div class="metric-header">
             <span class="metric-title">LOW STOCK ITEMS</span>
-            <span class="metric-icon" style="color: #d32f2f; background: #ffebee; padding: 8px; border-radius: 8px;">⚠️</span>
+            <span class="metric-icon" style="color: #d32f2f; background: #ffebee; padding: 8px; border-radius: 8px;"></span>
         </div>
         <div class="metric-value" style="color: #1a1a1a;" id="low-stock-count">0</div>
         <div class="metric-trend" style="color: #d32f2f;" id="low-stock-trend">Loading...</div>
@@ -161,14 +161,6 @@
         </div>
     </div>
 
-<script>
-        const logoutBtn = document.querySelector('.logout-btn');
-
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function() {
-                window.location.replace('SignIn.html');
-            });
-        }
-    </script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

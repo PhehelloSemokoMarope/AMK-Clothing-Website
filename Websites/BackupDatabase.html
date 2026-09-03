@@ -197,64 +197,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const runBackupBtn = document.getElementById('run-backup-btn');
-    const progressContainer = document.getElementById('progress-container');
-    const progressBar = document.getElementById('progress-bar');
-    const progressPercent = document.getElementById('progress-percent');
-    const progressSubtext = document.getElementById('progress-subtext');
-    const lastBackupText = document.getElementById('last-backup-text');
-    const tableBody = document.getElementById('backup-table-body');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    if (runBackupBtn) {
-        runBackupBtn.addEventListener('click', function() {
-            runBackupBtn.disabled = true;
-            runBackupBtn.textContent = 'Backing up...';
-            progressContainer.style.display = 'block';
-            
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 10;
-                progressBar.style.width = progress + '%';
-                progressPercent.textContent = progress + '%';
-
-                if (progress === 40) {
-                    progressSubtext.textContent = 'Encrypting database archive...';
-                } else if (progress === 80) {
-                    progressSubtext.textContent = 'Uploading to cloud storage...';
-                }
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    progressContainer.style.display = 'none';
-                    runBackupBtn.disabled = false;
-                    runBackupBtn.textContent = '📥 Run Backup Now';
-
-                    const now = new Date();
-                    const dateStr = '30 Jul 2026';
-                    const timeStr = '11:03 AM';
-                    lastBackupText.textContent = `Last backup: ${dateStr} at ${timeStr} — 4.5 MB`;
-
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td style="color: #888;">#005</td>
-                        <td>${dateStr}</td>
-                        <td>${timeStr}</td>
-                        <td>4.5 MB</td>
-                        <td><span style="color: #2e7d32; font-weight: 600; background-color: #e8f5e9; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">🟢 Success</span></td>
-                    `;
-                    tableBody.insertBefore(newRow, tableBody.firstChild);
-                }
-            }, 200);
-        });
-    }
-  </script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

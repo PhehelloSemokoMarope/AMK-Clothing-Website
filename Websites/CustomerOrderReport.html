@@ -118,33 +118,6 @@
     </div>
   </div>
 
-  <script>
-    const logoutBtn = document.querySelector('.logout-btn');
-    const custTableBody = document.getElementById('cust-report-table-body');
-    const custReportCount = document.getElementById('cust-report-count');
-    const exportCustBtn = document.getElementById('export-cust-btn');
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            window.location.replace('index.html');
-        });
-    }
-
-    if (exportCustBtn) {
-        exportCustBtn.addEventListener('click', function() {
-            alert('Customer orders report exported successfully!');
-        });
-    }
-
-    custTableBody.addEventListener('click', function(e) {
-        if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
-            const row = e.target.closest('tr');
-            row.remove();
-            
-            const currentCount = parseInt(custReportCount.textContent) || 1;
-            custReportCount.textContent = `${Math.max(0, currentCount - 1)} customer order records`;
-        }
-    });
-  </script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>
