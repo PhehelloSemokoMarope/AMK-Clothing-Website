@@ -97,13 +97,13 @@
           <form id="process-payment-form">
             <div class="input-row">
               <div class="input-group">
-                <label>Order ID :</label>
+                <label>Order ID *</label>
                 <select id="pay-order-id" required>
                     <option value="" disabled selected>Select an order number...</option>
                 </select>
               </div>
               <div class="input-group">
-                <label>Customer Name :</label>
+                <label>Customer Name *</label>
                 <select id="pay-customer" required>
                     <option value="" disabled selected>Select a customer...</option>
                 </select>
@@ -112,11 +112,11 @@
 
             <div class="input-row">
               <div class="input-group">
-                <label>Payment Amount (R) :</label>
+                <label>Payment Amount (R) *</label>
                 <input type="number" step="0.01" id="pay-amount" placeholder="e.g. 1500" required>
               </div>
               <div class="input-group">
-                <label>Payment Method :</label>
+                <label>Payment Method *</label>
                 <select id="pay-method" required>
                   <option value="" disabled selected>Select payment method</option>
                   <option value="Cash">Cash</option>

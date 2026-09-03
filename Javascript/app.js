@@ -2060,3 +2060,14 @@ if (splashScreen) {
         }
     });
 }
+function setWebsiteFavicon() {
+    let existingLink = document.querySelector("link[rel~='icon']");
+    if (!existingLink) {
+        let link = document.createElement('link');
+        link.rel = 'icon';
+        link.type = 'image/png';
+        link.href = '../Images/logo.png'; 
+        document.head.appendChild(link);
+    }
+}
+window.addEventListener('load', setWebsiteFavicon);
