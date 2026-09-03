@@ -99,18 +99,17 @@ if (clientSignupForm) {
 
 const clientLoginForm = document.getElementById('client-login-form');
 if (clientLoginForm) {
-    clientLoginForm.addEventListener('submit', (e) => {
+    clientLoginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('client-email').value.trim();
         const password = document.getElementById('client-password').value;
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                window.location.replace('ClientPortal.html');
-            })
-            .catch((error) => {
-                alert("Sign in failed: " + error.message);
-            });
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.replace('ClientPortal.html');
+        } catch (error) {
+            alert("Sign in failed: " + error.message);
+        }
     });
 }
 
@@ -152,7 +151,7 @@ if (clientPortalForm) {
         const length = document.getElementById('cp-length').value;
 
         if (!bust || !waist || !hips || !shoulder || !length) {
-            alert("All body measurements (Bust, Waist, Hips, Shoulder, Length) are required to submit a custom order request.");
+            alert("All body measurements are required.");
             return;
         }
 
@@ -224,7 +223,7 @@ if (clientPortalForm) {
                 });
 
                 clientPortalForm.reset();
-                alert(`Success! Your custom order request (${newOrderNumber}) and reference photo have been submitted to the design team.`);
+                alert(`Success! Your custom order request (${newOrderNumber}) has been submitted.`);
             } catch (error) {
                 alert('Error submitting request: ' + error.message);
             }
@@ -282,7 +281,7 @@ if (popForm) {
 
                 if (popModal) popModal.style.display = 'none';
                 popForm.reset();
-                alert("Proof of payment submitted successfully! The design team will review and approve it shortly.");
+                alert("Proof of payment submitted successfully!");
             } catch (err) {
                 alert("Error uploading proof of payment: " + err.message);
             }
@@ -301,12 +300,8 @@ onAuthStateChanged(auth, async (user) => {
     const currentPage = window.location.pathname.toLowerCase();
     const isClientAuthPage = currentPage.includes('clientsignin') || currentPage.includes('clientsignup');
 
-    if (!user && !isClientAuthPage) {
+    if (!user && !isClientAuthPage && currentPage.includes('clientportal')) {
         window.location.replace('ClientSignIn.html');
-        return;
-    }
-    if (user && isClientAuthPage) {
-        window.location.replace('ClientPortal.html');
         return;
     }
 
@@ -431,7 +426,7 @@ onAuthStateChanged(auth, async (user) => {
                 });
 
                 if (foundOrdersCount === 0) {
-                    clientOrdersTableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: #777;">No orders found for your account. Submit your first order using the portal!</td></tr>`;
+                    clientOrdersTableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: #777;">No orders found for your account.</td></tr>`;
                 }
 
                 const printButtons = clientOrdersTableBody.querySelectorAll('.client-print-slip');
@@ -483,7 +478,7 @@ onAuthStateChanged(auth, async (user) => {
                                     <p>Balance Due: R${Math.max(0, Number(amt) - Number(paid))}</p>
                                 </div>
                                 <div class="footer">
-                                    <p>Test thank you note</p>
+                                    <p>Thank you for choosing AMK Clothing!</p>
                                 </div>
                             </body>
                             </html>
@@ -529,7 +524,7 @@ onAuthStateChanged(auth, async (user) => {
                         });
 
                         if (count === 0) {
-                            chatMessagesContainer.innerHTML = `<p style="color: #777; text-align: center;">No messages yet. Send a message to start communicating with your tailor!</p>`;
+                            chatMessagesContainer.innerHTML = `<p style="color: #777; text-align: center;">No messages yet.</p>`;
                         }
                         chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
                     } catch (err) {
@@ -839,7 +834,7 @@ if (checkoutForm) {
             updateCartUI();
             checkoutForm.reset();
 
-            alert(`Checkout successful! Order reference (${newOrderNumber}) has been placed. Please upload your proof of payment via 'My Orders & Tracking'.`);
+            alert(`Checkout successful! Order reference (${newOrderNumber}) has been placed.`);
         } catch (error) {
             alert("Checkout failed: " + error.message);
         }
@@ -869,6 +864,7 @@ window.addEventListener('load', () => {
 
 loadStorefrontProducts();
 updateCartUI();
+
 function setWebsiteFavicon() {
     let existingLink = document.querySelector("link[rel~='icon']");
     if (!existingLink) {
