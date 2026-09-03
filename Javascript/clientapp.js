@@ -876,3 +876,32 @@ function setWebsiteFavicon() {
     }
 }
 window.addEventListener('load', setWebsiteFavicon);
+
+function makePagesMobileResponsive() {
+    if (window.innerWidth <= 768) {
+        const wrapper = document.querySelector('.dashboard-wrapper');
+        if (wrapper && wrapper.style.flexDirection !== 'column') {
+            wrapper.style.cssText = "display: flex; flex-direction: column; height: auto; min-height: 100vh; overflow-y: auto;";
+        }
+        
+        const sidebar = document.querySelector('ul');
+        if (sidebar) {
+            sidebar.style.cssText = "width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; justify-content: space-around; padding: 10px;";
+        }
+
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.style.cssText = "flex: 1; width: 100%; overflow-x: hidden;";
+        }
+
+        const storeGrids = document.querySelectorAll('.dashboard-body > div');
+        storeGrids.forEach(grid => {
+            if (grid.style.gridTemplateColumns) {
+                grid.style.gridTemplateColumns = "1fr";
+            }
+        });
+    }
+}
+
+window.addEventListener('load', makePagesMobileResponsive);
+window.addEventListener('resize', makePagesMobileResponsive);
