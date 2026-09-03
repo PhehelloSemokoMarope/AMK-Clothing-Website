@@ -2039,3 +2039,27 @@ if (adminChatForm) {
 }
 
 window.addEventListener('load', loadAdminChatHub);
+const splashScreen = document.getElementById('splash-screen');
+if (splashScreen) {
+    function hideSplash() {
+        splashScreen.classList.add('slide-up');
+    }
+
+    // Allow clicking/tapping to dismiss
+    splashScreen.addEventListener('click', hideSplash);
+
+    // Allow mobile swiping to dismiss
+    let touchStartY = 0;
+    
+    splashScreen.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    });
+
+    splashScreen.addEventListener('touchmove', function(e) {
+        let touchEndY = e.touches[0].clientY;
+        // If swiped up by more than 50px, trigger animation
+        if (touchStartY - touchEndY > 50) {
+            hideSplash();
+        }
+    });
+}
