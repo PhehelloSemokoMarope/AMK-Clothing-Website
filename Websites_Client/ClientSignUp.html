@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Client Sign Up</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body class="auth-body">
+
+  <div class="auth-container">
+    <img src="../Images/scissors.png" alt="Scissors Logo" class="auth-logo">
+    <div class="auth-title">AMK Clothing</div>
+    <div class="auth-subtitle">Client Portal Registration</div>
+    
+    <form id="client-signup-form">
+      <div class="input-group">
+        <label>Name *</label>
+        <input type="text" id="client-name" placeholder="Enter your name" required>
+      </div>
+
+      <div class="input-group">
+        <label>Surname *</label>
+        <input type="text" id="client-surname" placeholder="Enter your surname" required>
+      </div>
+
+      <div class="input-group">
+        <label>Phone Number *</label>
+        <input type="text" id="client-phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="input-group">
+        <label>Email Address *</label>
+        <input type="email" id="client-email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="input-group">
+        <label>Password *</label>
+        <input type="password" id="client-password" placeholder="Create a password" required>
+      </div>
+
+      <div class="input-group">
+        <label>Confirm Password *</label>
+        <input type="password" id="client-confirm-password" placeholder="Confirm your password" required>
+      </div>
+
+      <button type="submit" class="btn-auth">Register Account</button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account? <a href="ClientSignIn.html">Sign In</a>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/clientapp.js"></script>
+</body>
+</html>

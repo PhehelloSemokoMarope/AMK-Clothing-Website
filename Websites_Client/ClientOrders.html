@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - My Orders & Tracking</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Client Services</span>
+        </div>
+      </li>
+     
+      <li><a href="ClientPortal.html">Custom Orders</a></li>
+      <li><a href="ClientStore.html">Ready-Made Storefront</a></li>
+      <li><a href="ClientOrders.html" class="active" style="background-color: #3aafa9;">My Orders & Tracking</a></li>
+      <li><a href="ClientMessages.html">Messages & Tailor Chat</a></li>
+    </ul>
+
+    <div class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <h2>My Orders & Tracking</h2>
+          <p id="client-welcome-sub">Track active orders, print slips, and upload proof of payments.</p>
+        </div>
+        <div class="header-right">
+          <!-- Dynamically populated profile and logout button via clientapp.js -->
+        </div>
+      </header>
+
+      <div class="dashboard-body">
+        <div class="table-container">
+          <div class="table-header">
+            <h3>Active Orders & Payment Slips</h3>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order Ref</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Balance Due</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="client-orders-table-body">
+              <tr><td colspan="7" style="text-align: center; padding: 20px; color: #777;">Loading your orders...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pop-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Upload Proof of Payment (POP)</h3>
+        <button class="close-btn" id="cancel-pop-btn">&times;</button>
+      </div>
+      <form id="pop-form">
+        <input type="hidden" id="pop-order-ref">
+        <div class="input-group">
+          <label>Customer Name</label>
+          <input type="text" id="pop-customer-name" readonly style="background: #f9f9f9;">
+        </div>
+        <div class="input-group">
+          <label>Payment Amount (R)</label>
+          <input type="number" id="pop-amount" required placeholder="0.00" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div class="input-group">
+          <label>Select POP File (PDF / Image)</label>
+          <input type="file" id="pop-file" required accept="image/*,application/pdf" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" style="flex: 1;">Submit POP</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/clientapp.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing Dashboard</title>
+  <title>AMK Clothing - Customer Orders Report</title>
   <link rel="stylesheet" href="../Styling/StyleSheet.css">
 </head>
 <body>
@@ -54,7 +54,7 @@
         <div class="dropdown-content">
           <a href="SalesReport.html">Sales</a>
           <a href="InventoryReport.html">Inventory</a>
-          <a href="CustomerOrderReport.html">Customer Orders</a>
+          <a href="CustomerOrderReport.html" class="active">Customer Orders</a>
         </div>
       </li>
 
@@ -72,15 +72,15 @@
       <header class="top-header">
         <div class="header-left">
           <h2>Customer Orders Report</h2>
-          <p>Wednesday, 13 May 2026</p>
+          <p>Wednesday, 2 September 2026</p>
         </div>
        
         <div class="header-right">
           <div class="profile-info">
             <img src="../Images/user.png" alt="Profile" class="profile-icon">
             <div class="profile-text">
-              <span class="profile-name">Fashion Designer</span>
-              <span class="profile-role">Administrator</span>
+              <span class="profile-name" id="header-profile-name">Fashion Designer</span>
+              <span class="profile-role" id="header-profile-role">Administrator</span>
             </div>
           </div>
           <button class="logout-btn">Logout</button>
@@ -89,28 +89,28 @@
 
       <main class="dashboard-body">
         <div class="page-header-text">
-          <h2>Customer Orders Report</h2>
-          <p id="cust-report-count">0 customer order records</p>
+          <h2>All Customer Orders & Recorded Measurements</h2>
+          <p id="customer-order-count">0 customer order records</p>
         </div>
 
-        <div class="table-container">
-          <div class="toolbar">
-            <input type="text" class="search-bar" id="search-input" placeholder="Search customer orders...">
-            <button class="btn-primary" id="export-cust-btn">Export Report</button>
+        <div class="table-container" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div class="toolbar" style="margin-bottom: 20px;">
+            <input type="text" class="search-bar" id="customer-order-search" placeholder="Search customer, order ID, or garment..." style="padding: 10px 15px; width: 350px; border: 1px solid #ddd; border-radius: 8px;">
           </div>
           
-          <table class="data-table">
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
             <thead>
-              <tr>
-                <th>ORDER ID</th>
-                <th>CUSTOMER</th>
-                <th>DATE</th>
-                <th>GARMENT</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
+              <tr style="text-align: left; border-bottom: 2px solid #eee; color: #555;">
+                <th style="padding: 10px;">ORDER REF</th>
+                <th style="padding: 10px;">CUSTOMER NAME</th>
+                <th style="padding: 10px;">DATE</th>
+                <th style="padding: 10px;">GARMENT</th>
+                <th style="padding: 10px;">MEASUREMENTS (B / W / H / S / L)</th>
+                <th style="padding: 10px;">STATUS</th>
+                <th style="padding: 10px;">ACTIONS</th>
               </tr>
             </thead>
-            <tbody id="cust-report-table-body">
+            <tbody id="customer-order-report-body">
             </tbody>
           </table>
         </div>
@@ -118,6 +118,6 @@
     </div>
   </div>
 
-<script type="module" src="../Javascript/app.js"></script>
+  <script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>

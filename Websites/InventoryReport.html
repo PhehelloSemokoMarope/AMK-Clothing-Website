@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing Dashboard</title>
+  <title>AMK Clothing - Inventory Report</title>
   <link rel="stylesheet" href="../Styling/StyleSheet.css">
 </head>
 <body>
@@ -53,18 +53,12 @@
         <a href="javascript:void(0)" class="dropbtn">Reports</a>
         <div class="dropdown-content">
           <a href="SalesReport.html">Sales</a>
-          <a href="InventoryReport.html">Inventory</a>
+          <a href="InventoryReport.html" class="active">Inventory</a>
           <a href="CustomerOrderReport.html">Customer Orders</a>
         </div>
       </li>
 
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Administration</a>
-        <div class="dropdown-content">
-          <a href="ManageUsers.html">Manage Users</a>
-          <a href="BackupDatabase.html">Backup Database</a>
-        </div>
-      </li>
+ 
     </ul>
 
     <div class="main-content">
@@ -72,15 +66,15 @@
       <header class="top-header">
         <div class="header-left">
           <h2>Inventory Report</h2>
-          <p>Wednesday, 13 May 2026</p>
+          <p>Wednesday, 2 September 2026</p>
         </div>
        
         <div class="header-right">
           <div class="profile-info">
             <img src="../Images/user.png" alt="Profile" class="profile-icon">
             <div class="profile-text">
-              <span class="profile-name">Fashion Designer</span>
-              <span class="profile-role">Administrator</span>
+              <span class="profile-name" id="header-profile-name">Fashion Designer</span>
+              <span class="profile-role" id="header-profile-role">Administrator</span>
             </div>
           </div>
           <button class="logout-btn">Logout</button>
@@ -89,32 +83,71 @@
 
       <main class="dashboard-body">
         <div class="page-header-text">
-          <h2>Inventory Report</h2>
-          <p id="inv-report-count">0 inventory items tracked</p>
+          <h2>Inventory Stock Report</h2>
+          <p id="inventory-report-count">0 inventory items tracked</p>
         </div>
 
-        <div class="table-container">
-          <div class="toolbar">
-            <input type="text" class="search-bar" id="search-input" placeholder="Search inventory items...">
-            <button class="btn-primary" id="export-inv-btn">Export Report</button>
+        <div class="table-container" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div class="toolbar" style="margin-bottom: 20px;">
+            <input type="text" class="search-bar" id="inventory-report-search" placeholder="Search inventory item..." style="padding: 10px 15px; width: 300px; border: 1px solid #ddd; border-radius: 8px;">
           </div>
           
-          <table class="data-table">
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
             <thead>
-              <tr>
-                <th>ITEM ID</th>
-                <th>ITEM NAME</th>
-                <th>CATEGORY</th>
-                <th>QUANTITY</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
+              <tr style="text-align: left; border-bottom: 2px solid #eee; color: #555;">
+                <th style="padding: 10px;">ITEM ID</th>
+                <th style="padding: 10px;">ITEM NAME</th>
+                <th style="padding: 10px;">CATEGORY</th>
+                <th style="padding: 10px;">SUPPLIER</th>
+                <th style="padding: 10px;">QUANTITY</th>
+                <th style="padding: 10px;">REORDER LEVEL</th>
+                <th style="padding: 10px;">STATUS</th>
+                <th style="padding: 10px;">ACTIONS</th>
               </tr>
             </thead>
-            <tbody id="inv-report-table-body">
+            <tbody id="inventory-report-table-body">
             </tbody>
           </table>
         </div>
       </main>
+    </div>
+  </div>
+
+  <!-- Edit Inventory Item Modal -->
+  <div id="edit-inventory-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="background: white; padding: 30px; border-radius: 12px; width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+      <h3 style="margin-top: 0; color: #00796b;">Edit Inventory Item</h3>
+      <form id="edit-inventory-form">
+        <input type="hidden" id="edit-inv-id">
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Item Name *</label>
+          <input type="text" id="edit-inv-name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Category *</label>
+          <input type="text" id="edit-inv-category" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Supplier *</label>
+          <input type="text" id="edit-inv-supplier" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Color (Thread/Accessories)</label>
+          <input type="text" id="edit-inv-color" placeholder="e.g. Gold" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Quantity *</label>
+          <input type="number" id="edit-inv-qty" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px;">Reorder Level *</label>
+          <input type="number" id="edit-inv-reorder" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" id="cancel-edit-modal" style="padding: 8px 15px; background: #ccc; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancel</button>
+          <button type="submit" style="padding: 8px 15px; background: #00796b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Save Changes</button>
+        </div>
+      </form>
     </div>
   </div>
 

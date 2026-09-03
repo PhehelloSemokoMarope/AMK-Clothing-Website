@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing Dashboard</title>
+  <title>AMK Clothing Dashboard - Process Payment</title>
   <link rel="stylesheet" href="../Styling/StyleSheet.css">
 </head>
 <body>
@@ -35,7 +35,7 @@
       <li class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
         <div class="dropdown-content">
-          <a href="ProcessPayment.html">Process Payment</a>
+          <a href="ProcessPayment.html" class="active">Process Payment</a>
           <a href="Invoices.html">Invoices</a>
         </div>
       </li>
@@ -72,15 +72,15 @@
       <header class="top-header">
         <div class="header-left">
           <h2>Process Payment</h2>
-          <p>Wednesday, 13 May 2026</p>
+          <p>Thursday, 3 September 2026</p>
         </div>
        
         <div class="header-right">
           <div class="profile-info">
             <img src="../Images/user.png" alt="Profile" class="profile-icon">
             <div class="profile-text">
-              <span class="profile-name">Fashion Designer</span>
-              <span class="profile-role">Administrator</span>
+              <span class="profile-name" id="header-profile-name">Fashion Designer</span>
+              <span class="profile-role" id="header-profile-role">Administrator</span>
             </div>
           </div>
           <button class="logout-btn">Logout</button>
@@ -98,11 +98,15 @@
             <div class="input-row">
               <div class="input-group">
                 <label>Order ID *</label>
-                <input type="text" id="pay-order-id" placeholder="e.g. Order #101" required>
+                <select id="pay-order-id" required>
+                    <option value="" disabled selected>Select an order number...</option>
+                </select>
               </div>
               <div class="input-group">
                 <label>Customer Name *</label>
-                <input type="text" id="pay-customer" placeholder="Enter customer name" required>
+                <select id="pay-customer" required>
+                    <option value="" disabled selected>Select a customer...</option>
+                </select>
               </div>
             </div>
 
@@ -128,6 +132,47 @@
               <button type="reset" class="btn-secondary">Clear Form</button>
             </div>
           </form>
+        </div>
+
+        <!-- Pending Proof of Payments Verification Table -->
+        <div class="table-container" style="margin-top: 40px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <h3 style="color: #00796b; margin: 0;">Pending Client Proof of Payments (POP)</h3>
+          </div>
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr style="text-align: left; border-bottom: 2px solid #eee; color: #555;">
+                      <th style="padding: 10px;">ORDER REF</th>
+                      <th style="padding: 10px;">CUSTOMER NAME</th>
+                      <th style="padding: 10px;">SUBMITTED AMOUNT</th>
+                      <th style="padding: 10px;">DOCUMENT</th>
+                      <th style="padding: 10px;">ACTIONS</th>
+                  </tr>
+              </thead>
+              <tbody id="pending-pop-table-body">
+                  <!-- Pending POP rows load here dynamically -->
+              </tbody>
+          </table>
+        </div>
+
+        <div class="table-container" style="margin-top: 40px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <h3 style="color: #00796b; margin: 0;">Payment History</h3>
+              <input type="text" id="payment-search-input" placeholder="Search by Order ID (e.g., Order #01)..." style="padding: 8px 12px; width: 280px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+          </div>
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr style="text-align: left; border-bottom: 2px solid #eee; color: #555;">
+                      <th style="padding: 10px;">ORDER ID</th>
+                      <th style="padding: 10px;">CUSTOMER</th>
+                      <th style="padding: 10px;">AMOUNT (R)</th>
+                      <th style="padding: 10px;">METHOD</th>
+                      <th style="padding: 10px;">DATE</th>
+                  </tr>
+              </thead>
+              <tbody id="payments-table-body">
+              </tbody>
+          </table>
         </div>
       </main>
     </div>

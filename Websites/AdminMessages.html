@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Client Communications Hub</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+   
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Fashion Design Management</span>
+        </div>
+      </li>
+     
+      <li><a href="Homepage.html">Dashboard</a></li>
+      <li><a href="CustomerManagement.html">Customer Management</a></li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Order Management</a>
+        <div class="dropdown-content">
+          <a href="CreateOrder.html">Create Order</a>
+          <a href="UpdateOrder.html">Update Status</a>
+          <a href="RecordMeasurements.html">Record Measurements</a>
+        </div>
+      </li>
+     
+      <li><a href="AdminMessages.html" class="active" style="background-color: #3aafa9;">Client Chats</a></li>
+      
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
+        <div class="dropdown-content">
+          <a href="ProcessPayment.html">Process Payment</a>
+          <a href="Invoices.html">Invoices</a>
+        </div>
+      </li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
+        <div class="dropdown-content">
+          <a href="AddItems.html">Add Item</a>
+          <a href="UpdateStock.html">Update Stock</a>
+          <a href="LowStock.html">Low Stock Alerts</a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Reports</a>
+        <div class="dropdown-content">
+          <a href="SalesReport.html">Sales</a>
+          <a href="InventoryReport.html">Inventory</a>
+          <a href="CustomerOrderReport.html">Customer Orders</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="main-content">
+     
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Client Communication Hub</h2>
+          <p>Respond to customer inquiries, alteration requests, and measurement corrections.</p>
+        </div>
+       
+        <div class="header-right">
+        </div>
+      </header>
+
+      <main class="dashboard-body">
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 25px; height: 75vh;">
+          
+          <div class="table-container" style="padding: 20px; overflow-y: auto; height: 100%;">
+            <h3 style="color: #2b7a78; font-size: 1.1rem; margin-bottom: 15px;">Conversations</h3>
+            <div id="admin-client-list" style="display: flex; flex-direction: column; gap: 10px;">
+              <p style="color: #777; font-size: 13px;">Loading clients...</p>
+            </div>
+          </div>
+
+          <div class="table-container" style="display: flex; flex-direction: column; padding: 25px; height: 100%;">
+            <h3 id="active-chat-title" style="color: #2b7a78; margin-bottom: 15px;">Select a client conversation</h3>
+            
+            <div id="admin-chat-messages" style="flex: 1; border: 1px solid #eee; border-radius: 8px; padding: 15px; overflow-y: auto; background: #f9f9f9; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
+              <p style="color: #777; text-align: center;">Choose a client from the left to view messages.</p>
+            </div>
+
+            <form id="admin-chat-form" style="display: none; gap: 10px;">
+              <input type="text" id="admin-chat-input" required placeholder="Type reply as designer..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
+              <button type="submit" class="btn-primary" style="padding: 0 25px;">Send Reply</button>
+            </form>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/app.js"></script>
+</body>
+</html>

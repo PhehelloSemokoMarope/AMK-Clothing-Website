@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Tailor Direct Messages</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Client Services</span>
+        </div>
+      </li>
+     
+      <li><a href="ClientPortal.html">Custom Orders</a></li>
+      <li><a href="ClientStore.html">Ready-Made Storefront</a></li>
+      <li><a href="ClientOrders.html">My Orders & Tracking</a></li>
+      <li><a href="ClientMessages.html" class="active" style="background-color: #3aafa9;">Messages & Tailor Chat</a></li>
+    </ul>
+
+    <div class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Tailor Communication Hub</h2>
+          <p>Chat directly with your tailor regarding measurements, alterations, or custom requests.</p>
+        </div>
+        <div class="header-right">
+          <!-- Dynamically populated profile and logout button via clientapp.js -->
+        </div>
+      </header>
+
+      <div class="dashboard-body">
+        <div class="table-container" style="display: flex; flex-direction: column; height: 70vh; padding: 25px;">
+          <h3 style="color: #2b7a78; margin-bottom: 15px;">Conversation with Design Team</h3>
+          
+          <div id="chat-messages-container" style="flex: 1; border: 1px solid #eee; border-radius: 8px; padding: 15px; overflow-y: auto; background: #f9f9f9; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
+            <p style="color: #777; text-align: center;">Loading conversation...</p>
+          </div>
+
+          <form id="chat-send-form" style="display: flex; gap: 10px;">
+            <input type="text" id="chat-input-text" required placeholder="Type your message to the tailor (e.g. correcting my waist measurement to 74cm)..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
+            <button type="submit" class="btn-primary" style="padding: 0 25px;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/clientapp.js"></script>
+</body>
+</html>

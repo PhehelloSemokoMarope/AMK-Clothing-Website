@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing Dashboard</title>
+  <title>AMK Clothing - Sales Report</title>
   <link rel="stylesheet" href="../Styling/StyleSheet.css">
 </head>
 <body>
@@ -58,13 +58,6 @@
         </div>
       </li>
 
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Administration</a>
-        <div class="dropdown-content">
-          <a href="ManageUsers.html">Manage Users</a>
-          <a href="BackupDatabase.html">Backup Database</a>
-        </div>
-      </li>
     </ul>
 
     <div class="main-content">
@@ -72,45 +65,58 @@
       <header class="top-header">
         <div class="header-left">
           <h2>Sales Report</h2>
-          <p>Wednesday, 13 May 2026</p>
+          <p>Wednesday, 2 September 2026</p>
         </div>
        
         <div class="header-right">
-          <div class="profile-info">
-            <img src="../Images/user.png" alt="Profile" class="profile-icon">
-            <div class="profile-text">
-              <span class="profile-name">Fashion Designer</span>
-              <span class="profile-role">Administrator</span>
-            </div>
-          </div>
-          <button class="logout-btn">Logout</button>
-        </div>
+       <div class="profile-info">
+  <img src="../Images/user.png" alt="Profile" class="profile-icon">
+  <div class="profile-text">
+    <span class="profile-name" id="header-profile-name">Fashion Designer</span>
+    <span class="profile-role" id="header-profile-role">Administrator</span>
+  </div>
+</div>
       </header>
 
       <main class="dashboard-body">
         <div class="page-header-text">
-          <h2>Sales Report</h2>
-          <p id="report-count">0 recorded sales entries</p>
+          <h2>Fully Paid Outfits & Sales</h2>
+          <p id="sales-count">0 fully paid outfits recorded</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Total Revenue From Fully Paid Orders</span>
+            </div>
+            <div class="metric-value" id="total-revenue-metric">R0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Fully Paid Outfits Sold</span>
+            </div>
+            <div class="metric-value" id="total-outfits-metric">0</div>
+          </div>
         </div>
 
         <div class="table-container">
-          <div class="toolbar">
-            <input type="text" class="search-bar" id="search-input" placeholder="Search sales by order or client...">
-            <button class="btn-primary" id="export-sales-btn">Export Report</button>
+          <div class="toolbar" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <input type="text" class="search-bar" id="sales-search-input" placeholder="Search by Order ID, Customer, or Outfit..." style="padding: 10px 15px; width: 320px; border: 1px solid #ddd; border-radius: 8px;">
           </div>
           
           <table class="data-table">
             <thead>
               <tr>
-                <th>TRANSACTION ID</th>
+                <th>ORDER ID</th>
                 <th>CUSTOMER</th>
+                <th>GARMENT / OUTFIT</th>
+                <th>TOTAL PRICE (R)</th>
+                <th>STATUS</th>
                 <th>DATE</th>
-                <th>GARMENT / ITEM</th>
-                <th>AMOUNT</th>
-                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody id="sales-table-body">
+              <!-- Fully paid outfits load here -->
             </tbody>
           </table>
         </div>
@@ -118,6 +124,6 @@
     </div>
   </div>
 
-  <script type="module" src="../Javascript/app.js"></script>
+<script type="module" src="../Javascript/app.js"></script>
 </body>
 </html>
