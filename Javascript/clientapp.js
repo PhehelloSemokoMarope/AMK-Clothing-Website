@@ -121,7 +121,7 @@ document.addEventListener('click', (e) => {
         signOut(auth).then(() => {
             localStorage.clear();
             sessionStorage.clear();
-            window.location.replace('ClientSignIn.html');
+            window.location.replace('../index.html');
         }).catch((error) => {
             alert("Error logging out: " + error.message);
         });

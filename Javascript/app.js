@@ -27,7 +27,6 @@ function formatCleanFullName(rawName) {
         .join(' ');
 }
 
-// Helper to extract and format separated first and last names from order records
 function getSeparatedCustomerDisplay(data) {
     let fName = data.clientFirstName || '';
     let sName = data.clientSurname || '';
@@ -68,10 +67,10 @@ onAuthStateChanged(auth, async (user) => {
     if (!user && !isLoginPage) {
         window.location.replace('SignIn.html'); 
     } 
-    else if (user && isLoginPage) {
+    else if (user && isLoginPage && !currentPage.includes('index.html') && !currentPage.endsWith('/Websites/')) {
         window.location.replace('Homepage.html');
     }
-    else if (user) {
+    else if (user && !isLoginPage) {
         const nameElements = document.querySelectorAll('#header-profile-name, .profile-name');
         const roleElements = document.querySelectorAll('#header-profile-role, .profile-role');
 
@@ -125,7 +124,7 @@ document.addEventListener('click', (e) => {
         signOut(auth).then(() => {
             localStorage.clear();
             sessionStorage.clear();
-            window.location.replace('SignIn.html');
+            window.location.replace('index.html');
         }).catch((error) => {
             alert("Error logging out: " + error.message);
         });
@@ -2039,16 +2038,15 @@ if (adminChatForm) {
 }
 
 window.addEventListener('load', loadAdminChatHub);
+
 const splashScreen = document.getElementById('splash-screen');
 if (splashScreen) {
     function hideSplash() {
         splashScreen.classList.add('slide-up');
     }
 
-    // Allow clicking/tapping to dismiss
     splashScreen.addEventListener('click', hideSplash);
 
-    // Allow mobile swiping to dismiss
     let touchStartY = 0;
     
     splashScreen.addEventListener('touchstart', function(e) {
@@ -2057,7 +2055,6 @@ if (splashScreen) {
 
     splashScreen.addEventListener('touchmove', function(e) {
         let touchEndY = e.touches[0].clientY;
-        // If swiped up by more than 50px, trigger animation
         if (touchStartY - touchEndY > 50) {
             hideSplash();
         }
