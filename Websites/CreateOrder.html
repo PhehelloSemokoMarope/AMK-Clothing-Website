@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Create & Review Order</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Fashion Design Management</span>
+        </div>
+      </li>
+     
+      <li><a href="Homepage.html">Dashboard</a></li>
+      <li><a href="CustomerManagement.html">Customer Management</a></li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn active" style="background-color: #3aafa9;">Order Management</a>
+        <div class="dropdown-content">
+          <a href="CreateOrder.html" style="background-color: #2b7a78; color: white;">Create Order</a>
+          <a href="UpdateOrder.html">Update Status</a>
+          <a href="RecordMeasurements.html">Record Measurements</a>
+        </div>
+      </li>
+     
+      <li><a href="AdminMessages.html">Client Chats</a></li>
+      
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
+        <div class="dropdown-content">
+          <a href="ProcessPayment.html">Process Payment</a>
+          <a href="Invoices.html">Invoices</a>
+        </div>
+      </li>
+     
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
+        <div class="dropdown-content">
+          <a href="AddItems.html">Add Item</a>
+          <a href="UpdateStock.html">Update Stock</a>
+          <a href="LowStock.html">Low Stock Alerts</a>
+        </div>
+      </li>
+
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Reports</a>
+        <div class="dropdown-content">
+          <a href="SalesReport.html">Sales</a>
+          <a href="InventoryReport.html">Inventory</a>
+          <a href="CustomerOrderReport.html">Customer Orders</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Create & Review Orders</h2>
+          <p>Create manual orders from scratch or finalize incoming online requests.</p>
+        </div>
+        <div class="header-right">
+        </div>
+      </header>
+
+      <main class="dashboard-body">
+        <div class="form-card" style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+          
+          <div style="margin-bottom: 20px;">
+            <label style="font-weight: bold; color: #2b7a78; display: block; margin-bottom: 8px;">Order Creation Mode:</label>
+            <select id="order-mode-select" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-weight: bold;">
+              <option value="scratch">Create New Order from Scratch (Existing Customers)</option>
+              <option value="online">Review & Finalize Online Request / Purchase</option>
+            </select>
+          </div>
+
+          <form id="create-order-form">
+            <!-- Online Order Selection Panel (Hidden by default) -->
+            <div id="online-selection-group" style="display: none; margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
+              <label for="order-ref-select" style="font-weight: bold; display: block; margin-bottom: 5px;">Select Pending Online Request / Purchase :</label>
+              <select id="order-ref-select" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                <option value="" disabled selected>Select an online order reference...</option>
+              </select>
+            </div>
+
+            <!-- Customer Selection (Scratch Mode) -->
+            <div id="scratch-customer-group" class="input-group" style="margin-bottom: 15px;">
+              <label for="order-customer">Select Existing Customer :</label>
+              <select id="order-customer" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                <option value="" disabled selected>Select a customer...</option>
+              </select>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 15px;">
+              <label for="order-item">Garment / Item Description :</label>
+              <input type="text" id="order-item" required placeholder="e.g. Custom Evening Gown / Ready-Made Purchase" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div class="input-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
+              <div class="input-group" style="flex: 1;">
+                <label for="order-fabric">Fabric Type</label>
+                <select id="order-fabric" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                  <option value="" disabled selected>Select fabric...</option>
+                </select>
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="order-date">Order Date :</label>
+                <input type="date" id="order-date" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+            </div>
+
+            <div class="input-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
+              <div class="input-group" style="flex: 1;">
+                <label for="order-amount">Total Amount (R) :</label>
+                <input type="number" id="order-amount" step="0.01" required placeholder="0.00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="order-status">Initial Status :</label>
+                <select id="order-status" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                  <option value="Processing">Processing</option>
+                  <option value="In-progress">In-progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;">Save & Finalize Order</button>
+          </form>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/app.js"></script>
+</body>
+</html>

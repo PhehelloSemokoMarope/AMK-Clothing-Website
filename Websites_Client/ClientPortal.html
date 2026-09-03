@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Custom Orders Portal</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Client Services</span>
+        </div>
+      </li>
+     
+      <li><a href="ClientPortal.html" class="active" style="background-color: #3aafa9;">Custom Orders</a></li>
+      <li><a href="ClientStore.html">Ready-Made Storefront</a></li>
+      <li><a href="ClientOrders.html">My Orders & Tracking</a></li>
+      <li><a href="ClientMessages.html">Messages & Tailor Chat</a></li>
+    </ul>
+
+    <div class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Custom Order Portal</h2>
+          <p>Submit your custom garment measurements, design photos, and specifications.</p>
+        </div>
+        <div class="header-right">
+          <!-- Dynamically populated profile and logout button via clientapp.js -->
+        </div>
+      </header>
+
+      <div class="dashboard-body">
+        <div class="form-card" style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+          
+          <div class="page-header-text" style="margin-bottom: 25px;">
+            <h2>Submit Custom Clothing Request</h2>
+            <p id="client-welcome-sub">Provide your design reference photo, full body measurements, and garment specifications below.</p>
+          </div>
+
+          <form id="client-portal-form">
+            <h3 style="font-size: 1rem; color: #2b7a78; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px;">Client Information</h3>
+            <div class="input-row" style="display: flex; gap: 20px; margin-bottom: 15px;">
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-name">Full Name :</label>
+                <input type="text" id="cp-name" required placeholder="Full Name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-phone">Phone Number :</label>
+                <input type="text" id="cp-phone" required placeholder="Phone Number" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+            </div>
+            <div class="input-group" style="margin-bottom: 25px;">
+              <label for="cp-email">Email Address :</label>
+              <input type="email" id="cp-email" required readonly placeholder="Email Address" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+            </div>
+
+            <h3 style="font-size: 1rem; color: #2b7a78; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px;">Design Specifications & Reference Photo</h3>
+            <div class="input-group" style="margin-bottom: 15px;">
+              <label for="cp-garment">Garment Type / Description :</label>
+              <input type="text" id="cp-garment" required placeholder="e.g. Custom Evening Gown, Traditional Attire" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <div class="input-group" style="margin-bottom: 15px;">
+              <label for="cp-design-image">Reference Design Photo (Image) :</label>
+              <input type="file" id="cp-design-image" required accept="image/:" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+            </div>
+            <div class="input-group" style="margin-bottom: 15px;">
+              <label for="cp-fabric">Fabric Type / Preference :</label>
+              <input type="text" id="cp-fabric" required placeholder="e.g. Silk, Satin, Client Provided Shweshwe" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <div class="input-group" style="margin-bottom: 25px;">
+              <label for="cp-notes">Special Instructions / Notes</label>
+              <textarea id="cp-notes" placeholder="Describe specific design details..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; height: 80px;"></textarea>
+            </div>
+
+            <h3 style="font-size: 1rem; color: #2b7a78; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px;">Body Measurements (cm) - Required :</h3>
+            <div class="input-row" style="display: flex; gap: 15px; margin-bottom: 15px;">
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-bust">Bust :</label>
+                <input type="number" id="cp-bust" step="0.1" required placeholder="0.0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-waist">Waist :</label>
+                <input type="number" id="cp-waist" step="0.1" required placeholder="0.0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-hips">Hips :</label>
+                <input type="number" id="cp-hips" step="0.1" required placeholder="0.0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+            </div>
+            <div class="input-row" style="display: flex; gap: 15px; margin-bottom: 30px;">
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-shoulder">Shoulder :</label>
+                <input type="number" id="cp-shoulder" step="0.1" required placeholder="0.0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="flex: 1;">
+                <label for="cp-length">Length :</label>
+                <input type="number" id="cp-length" step="0.1" required placeholder="0.0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;">Submit Custom Order Request</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/clientapp.js"></script>
+</body>
+</html>

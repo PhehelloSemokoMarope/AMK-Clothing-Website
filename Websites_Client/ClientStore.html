@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Ready-Made Storefront</title>
+  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA97JKuvxQLTumy8Ul2t-WmBWsAoHx2SEg&libraries=places" async defer></script>
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <ul>
+      <li class="sidebar">
+        <div class="icon-box">
+          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
+        </div>
+        <div class="AMK-text">
+          <span class="AMK-title">FDMS</span>
+          <span class="AMK-subtitle">Client Services</span>
+        </div>
+      </li>
+     
+      <li><a href="ClientPortal.html">Custom Orders</a></li>
+      <li><a href="ClientStore.html" class="active" style="background-color: #3aafa9;">Ready-Made Storefront</a></li>
+      <li><a href="ClientOrders.html">My Orders & Tracking</a></li>
+      <li><a href="ClientMessages.html">Messages & Tailor Chat</a></li>
+    </ul>
+
+    <div class="main-content">
+      <header class="top-header">
+        <div class="header-left">
+          <h2>Ready-Made Storefront & Alterations</h2>
+          <p>Browse available garments, select your size, request modifications, and check out.</p>
+        </div>
+        <div class="header-right">
+          <span>Cart Items: <strong id="cart-item-count" style="color: #2b7a78;">0</strong></span>
+        </div>
+      </header>
+
+      <div class="dashboard-body">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+          
+          <div>
+            <div class="page-header-text">
+              <h2>Available Ready-Made Garments</h2>
+              <p>Pick your size or toggle alterations to customize your garment before adding to cart.</p>
+            </div>
+            <div id="storefront-product-grid" class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;">
+            </div>
+          </div>
+
+          <div class="table-container" style="height: fit-content; padding: 25px;">
+            <h3 style="margin-top: 0; color: #2b7a78; margin-bottom: 20px; font-size: 1.1rem;">Your Shopping Cart</h3>
+            <div id="cart-items-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px;">
+              <p style="color: #777; text-align: center; font-size: 14px;">Your cart is empty.</p>
+            </div>
+            
+            <div style="border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; font-size: 18px; font-weight: bold;">
+              <span>Total:</span>
+              <span id="cart-total-amount" style="color: #2b7a78;">R0</span>
+            </div>
+
+            <form id="checkout-form">
+              <h4 style="margin: 0 0 15px 0; font-size: 0.95rem; color: #333;">Checkout Details</h4>
+              <div class="input-group" style="margin-bottom: 15px;">
+                <label for="checkout-customer-name">Full Name :</label>
+                <input type="text" id="checkout-customer-name" required placeholder="e.g. Lerato Khumalo" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="margin-bottom: 15px;">
+                <label for="checkout-customer-email">Email Address :</label>
+                <input type="email" id="checkout-customer-email" required placeholder="e.g. lerato@example.com" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="margin-bottom: 15px;">
+                <label for="checkout-customer-phone">Phone Number :</label>
+                <input type="text" id="checkout-customer-phone" required placeholder="e.g. 082 123 4567" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="margin-bottom: 15px; position: relative;">
+                <label for="checkout-delivery-address">Delivery Address :</label>
+                <input type="text" id="checkout-delivery-address" autocomplete="off" required placeholder="Start typing your street address..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+              </div>
+              <div class="input-group" style="margin-bottom: 20px;">
+                <label for="checkout-payment-method">Payment Method :</label>
+                <select id="checkout-payment-method" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                  <option value="" disabled selected>Select payment method...</option>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="EFT">EFT / Bank Transfer</option>
+                  <option value="Cash">Cash on Delivery</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%;">Complete Purchase</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../Javascript/clientapp.js"></script>
+</body>
+</html>
