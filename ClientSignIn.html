@@ -3,35 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing - Client Sign In</title>
-  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+  <title>AMK Clothing - Sign In</title>
+  <link rel="stylesheet" href="Styling/StyleSheet.css">
 </head>
-<body class="auth-body">
-
-  <div class="auth-container">
-    <img src="../Images/scissors.png" alt="Scissors Logo" class="auth-logo">
-    <div class="auth-title">AMK Clothing</div>
-    <div class="auth-subtitle">Client Portal Login</div>
+<body class="welcome-body">
+  
+  <div id="role-selection">
+    <a href="ClientSignInForm.html" class="role-card">
+      <h2>Customer</h2>
+      <p>Shop the latest fashion and manage your orders.</p>
+      <span class="btn">Sign In as Customer</span>
+    </a>
     
-    <form id="client-login-form">
-      <div class="input-group">
-        <label>Email Address :</label>
-        <input type="email" id="client-email" placeholder="Enter your email" required>
-      </div>
-
-      <div class="input-group">
-        <label>Password :</label>
-        <input type="password" id="client-password" placeholder="Enter your password" required>
-      </div>
-
-      <button type="submit" class="btn-auth">Sign In</button>
-    </form>
-
-    <div class="auth-footer">
-      Don't have an account? <a href="ClientSignUp.html">Register here</a>
-    </div>
+    <a href="SignIn.html" class="role-card admin-card">
+      <h2>Admin</h2>
+      <p>Manage store inventory, orders, and clients.</p>
+      <span class="btn">Sign In as Admin</span>
+    </a>
   </div>
 
-  <script type="module" src="../Javascript/clientapp.js"></script>
+  <script type="module" src="Javascript/clientapp.js"></script>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Customer Sign In</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Sign in to access your AMK Clothing account and track orders.</p>
+
+        <form id="client-login-form">
+            <div class="input-group">
+                <label for="client-email">Email Address</label>
+                <input type="email" id="client-email" required placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label for="client-password">Password</label>
+                <input type="password" id="client-password" required placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn-auth">Sign In</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="ClientSignUp.html">Sign Up</a></p>
+            <p style="margin-top: 10px;"><a href="index.html">Back to Store</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, updateDoc, where } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, updateDoc, where, deleteDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -27,29 +27,73 @@ function formatCleanFullName(rawName) {
         .join(' ');
 }
 
-function ensureClientUniversalHeader() {
-    const headerRightContainers = document.querySelectorAll('.top-header .header-right');
-    
-    headerRightContainers.forEach(container => {
-        if (!container.querySelector('.profile-info')) {
-            const existingLogoutBtn = container.querySelector('.logout-btn') || container.querySelector('button');
-            const logoutBtnHtml = existingLogoutBtn ? existingLogoutBtn.outerHTML : '<button class="logout-btn" id="client-logout-btn">Logout</button>';
-            
-            container.innerHTML = `
-                <div class="profile-info" style="display: flex; align-items: center; gap: 10px;">
-                    <img src="../Images/user.png" alt="Profile" class="profile-icon" style="width: 32px; height: 32px; border-radius: 50%;">
-                    <div class="profile-text" style="display: flex; flex-direction: column; text-align: left;">
-                      <span class="profile-name" id="header-client-name" style="font-weight: bold; font-size: 13px; color: #333;">Loading...</span>
-                      <span class="profile-role" id="header-client-role" style="font-size: 11px; color: #777;">Please wait</span>
+onAuthStateChanged(auth, async (user) => {
+    const authContainer = document.getElementById('auth-header-container');
+    if (authContainer) {
+        if (user) {
+            try {
+                const clientQuery = query(collection(db, "clients"), where("email", "==", user.email));
+                const clientSnap = await getDocs(clientQuery);
+                let firstName = "Client";
+
+                if (!clientSnap.empty) {
+                    const data = clientSnap.docs[0].data();
+                    firstName = data.firstName || data.fullName?.split(' ')[0] || user.email.split('@')[0];
+                } else {
+                    firstName = user.email.split('@')[0];
+                }
+
+                authContainer.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 25px;">
+                        <i class="far fa-user" style="color: #d96c06;"></i>
+                        <span style="color: #1c2841; font-weight: 700; font-size: 0.9rem;">Hi, ${formatCleanFullName(firstName)}</span>
+                        <button id="global-logout-btn" style="background-color: #fcd34d !important; color: #1c2841 !important; border: none; padding: 4px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.8rem;" title="Sign Out">Logout</button>
                     </div>
-                </div>
-                ${logoutBtnHtml}
+                `;
+
+                const logoutBtn = document.getElementById('global-logout-btn');
+                if (logoutBtn) {
+                    logoutBtn.onclick = async () => {
+                        await signOut(auth);
+                        window.location.reload();
+                    };
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            authContainer.innerHTML = `
+                <a href="ClientSignIn.html" class="sign-in-btn" id="nav-signin-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
             `;
         }
-    });
-}
+    }
 
-ensureClientUniversalHeader();
+    updateHeaderBadges(user);
+});
+
+async function updateHeaderBadges(user) {
+    const cartCountEl = document.getElementById('cart-item-count');
+    const wishlistCountEl = document.getElementById('wishlist-item-count');
+
+    if (user) {
+        try {
+            const cartQuery = query(collection(db, "cart"), where("userEmail", "==", user.email));
+            const cartSnap = await getDocs(cartQuery);
+            if (cartCountEl) cartCountEl.textContent = cartSnap.size;
+
+            const wishQuery = query(collection(db, "wishlist"), where("userEmail", "==", user.email));
+            const wishSnap = await getDocs(wishQuery);
+            if (wishlistCountEl) wishlistCountEl.textContent = wishSnap.size;
+        } catch (err) {
+            console.error(err);
+        }
+    } else {
+        if (cartCountEl) cartCountEl.textContent = '0';
+        if (wishlistCountEl) wishlistCountEl.textContent = '0';
+    }
+}
 
 const clientSignupForm = document.getElementById('client-signup-form');
 if (clientSignupForm) {
@@ -89,8 +133,8 @@ if (clientSignupForm) {
                 timestamp: new Date()
             });
 
-            alert('Registration successful! You can now sign in to your client portal.');
-            window.location.replace('ClientSignIn.html');
+            alert('Registration successful! Welcome to AMK Clothing.');
+            window.location.replace('index.html');
         } catch (error) {
             alert('Registration failed: ' + error.message);
         }
@@ -106,7 +150,7 @@ if (clientLoginForm) {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            window.location.replace('ClientPortal.html');
+            window.location.replace('index.html');
         } catch (error) {
             alert("Sign in failed: " + error.message);
         }
@@ -292,11 +336,9 @@ if (popForm) {
 }
 
 const clientOrdersTableBody = document.getElementById('client-orders-table-body');
-const checkoutFormEl = document.getElementById('checkout-form');
 const chatMessagesContainer = document.getElementById('chat-messages-container');
 
 onAuthStateChanged(auth, async (user) => {
-    ensureClientUniversalHeader();
     const currentPage = window.location.pathname.toLowerCase();
     const isClientAuthPage = currentPage.includes('clientsignin') || currentPage.includes('clientsignup');
 
@@ -567,341 +609,401 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-const cartState = {
-    items: [],
-    total: 0
-};
-
-async function loadStorefrontProducts() {
-    const storefrontContainer = document.getElementById('storefront-product-grid');
-    if (!storefrontContainer) return;
-
-    const catalogItems = [
-        { name: "Asymmetrical Puff-Sleeve Midi Dress", color: "Solid Black", price: 850, image: "../Images/Outfit_Pics/Image (1).jpg" },
-        { name: "Striped Corset Top & Printed Pant Set", color: "Gold Stripe & Maroon Floral", price: 1200, image: "../Images/Outfit_Pics/Image (2).jpg" },
-        { name: "Collared Pleated Tennis Dress", color: "Black and White Trim", price: 650, image: "../Images/Outfit_Pics/Image (3).jpg" },
-        { name: "Structured Puff-Sleeve Cocktail Dress", color: "Solid Black", price: 780, image: "../Images/Outfit_Pics/Image (4).jpg" },
-        { name: "Sleeveless Pleated Mini Dress", color: "Black with White Accents", price: 600, image: "../Images/Outfit_Pics/Image (5).jpg" },
-        { name: "Industrial Reflective Work Shirt", color: "Navy Blue with Silver Tape", price: 450, image: "../Images/Outfit_Pics/Image (6).jpg" },
-        { name: "Traditional African Print Statement Dress", color: "Red, Black & Gold Print", price: 1100, image: "../Images/Outfit_Pics/Image (7).jpg" },
-        { name: "Two-Tone Heavy-Duty Work Shirt", color: "Royal Blue & Black", price: 480, image: "../Images/Outfit_Pics/Image (8).jpg" },
-        { name: "High-Visibility Safety Vest", color: "Red with Double Silver Tape", price: 250, image: "../Images/Outfit_Pics/Image (9).jpg" },
-        { name: "Industrial Two-Tone Safety Shirt", color: "Red & Navy Blue", price: 490, image: "../Images/Outfit_Pics/Image (10).jpg" },
-        { name: "High-Visibility Safety Vest with Pockets", color: "Neon Yellow & Navy Blue", price: 280, image: "../Images/Outfit_Pics/Image (11).jpg" },
-        { name: "Medical Scrubs Set", color: "Vibrant Red", price: 500, image: "../Images/Outfit_Pics/Image (12).jpg" },
-        { name: "Letterman Varsity Jacket", color: "Navy Blue & White with 'A' Patch", price: 890, image: "../Images/Outfit_Pics/Image (13).jpg" },
-        { name: "School Blazer with Gold Trim", color: "Navy Blue with Gold Crest", price: 750, image: "../Images/Outfit_Pics/Image (14).jpg" },
-        { name: "Matching Choir Dress Set", color: "Purple Top & Green Floral Skirt", price: 1150, image: "../Images/Outfit_Pics/Image (15).jpg" },
-        { name: "Elegance High-Low Evening Gown", color: "Purple with Floral Skirt Accent", price: 1400, image: "../Images/Outfit_Pics/Image (16).jpg" },
-        { name: "Traditional Cultural Dress", color: "Pink, Blue & Red", price: 950, image: "../Images/Outfit_Pics/Image (17).jpg" },
-        { name: "Traditional Patterned Long Kimono", color: "Deep Maroon with Patterned Trim", price: 880, image: "../Images/Outfit_Pics/Image (18).jpg" },
-        { name: "Beaded Lace Ball Gown", color: "Midnight Black", price: 1600, image: "../Images/Outfit_Pics/Image (19).jpg" },
-        { name: "Ruffled Satin Cocktail Dress", color: "Bright Pink / Rose", price: 920, image: "../Images/Outfit_Pics/Image (20).jpg" },
-        { name: "Traditional African Print Top", color: "Black with White Geometric Print", price: 450, image: "../Images/Outfit_Pics/Image (21).jpg" },
-        { name: "Decorative Fabric Bow Stick", color: "Solid Red", price: 120, image: "../Images/Outfit_Pics/Image (22).jpg" },
-        { name: "Traditional Collar Shirt", color: "Mustard Gold with Patterned Accents", price: 520, image: "../Images/Outfit_Pics/Image (23).jpg" },
-        { name: "Canvas Fabric Storage Bin", color: "Burlap & Red", price: 180, image: "../Images/Outfit_Pics/Image (24).jpg" },
-        { name: "Handcrafted Fabric Bow Accents Bundle", color: "Solid Red", price: 300, image: "../Images/Outfit_Pics/Image (25).jpg" },
-        { name: "Glitter Mermaid Prom Dress", color: "Silver Grey with Leg Slit", price: 1500, image: "../Images/Outfit_Pics/Image (26).jpg" },
-        { name: "Traditional Striped Collar Shirt", color: "White with Multi-Colored Striping", price: 540, image: "../Images/Outfit_Pics/Image (27).jpg" },
-        { name: "Puff-Sleeve Bow Blouse & Skirt Set", color: "Red Floral Top & Cream Skirt", price: 1250, image: "../Images/Outfit_Pics/Image (28).jpg" },
-        { name: "Glitter Mermaid Gown (Side Profile)", color: "Silver Grey", price: 1500, image: "../Images/Outfit_Pics/Image (29).jpg" },
-        { name: "Beaded Lace Ball Gown with Tulle", color: "Black", price: 1650, image: "../Images/Outfit_Pics/Image (30).jpg" },
-        { name: "Handcrafted Suede Hair Bow", color: "Deep Rust Orange", price: 150, image: "../Images/Outfit_Pics/Image (31).jpg" },
-        { name: "Waterproof Winter Puffer Jacket", color: "Cyan Blue & Black", price: 950, image: "../Images/Outfit_Pics/Image (32).jpg" },
-        { name: "Ruffled Collar Formal Interview Dress", color: "Sky Blue", price: 1100, image: "../Images/Outfit_Pics/Image (33).jpg" },
-        { name: "Abstract Print Wrap Dress", color: "Black & White Abstract", price: 980, image: "../Images/Outfit_Pics/Image (34).jpg" },
-        { name: "Beaded Embellished Flare Dress", color: "Sky Blue with Rhinestones", price: 1350, image: "../Images/Outfit_Pics/Image (35).jpg" },
-        { name: "Custom Branded Event Puffer Jackets", color: "Navy Blue with Photo Collage Print", price: 1050, image: "../Images/Outfit_Pics/Image (36).jpg" },
-        { name: "Fringe Hem Two-Tone Dress", color: "White & Mustard Gold with Fringes", price: 1200, image: "../Images/Outfit_Pics/Image (37).jpg" },
-        { name: "Heavy Winter Parka Jacket", color: "Maroon with Reflective Tape", price: 980, image: "../Images/Outfit_Pics/Image (38).jpg" },
-        { name: "Dramatic Ruffle-Collar Ball Gown", color: "Deep Magenta / Rose", price: 1550, image: "../Images/Outfit_Pics/Image (39).jpg" },
-        { name: "Winter Puffer Jacket (Hanging)", color: "Maroon with Reflective Tape", price: 980, image: "../Images/Outfit_Pics/Image (40).jpg" }
-    ];
-
-    try {
-        const q = query(collection(db, "inventory"), orderBy("timestamp", "desc"));
-        const querySnapshot = await getDocs(q);
-
-        let dbProducts = [];
-        querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const category = (data.category || '').toLowerCase();
-            if (category.includes('ready') || category.includes('clothing') || category.includes('garment') || category.includes('retail')) {
-                dbProducts.push({
-                    id: docSnap.id,
-                    name: data.itemName || 'Garment',
-                    color: data.color || 'Standard',
-                    price: Number(data.cost || 500),
-                    image: data.imageUrl || '../Images/Outfit_Pics/Image (1).jpg'
-                });
-            }
-        });
-
-        const finalProducts = dbProducts.length > 0 ? dbProducts : catalogItems;
-
-        storefrontContainer.innerHTML = '';
-        
-        finalProducts.forEach((item, index) => {
-            const itemCard = document.createElement('div');
-            itemCard.className = "metric-card";
-            itemCard.style.cssText = "background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 10px;";
-            
-            itemCard.innerHTML = `
-                <img src="${item.image || '../Images/Outfit_Pics/Image (1).jpg'}" alt="${item.name}" style="width: 100%; height: 220px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 5px;">
-                <h3 style="color: #1a1a1a; margin: 0; font-size: 1.05rem; font-weight: bold;">${item.name}</h3>
-                <p style="margin: 0; color: #777; font-size: 0.85rem;">Color: ${item.color}</p>
-                <p style="margin: 0; font-weight: bold; font-size: 1.1rem; color: #2b7a78;">R${item.price}</p>
-                
-                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <select class="cart-size-select" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd; outline: none; font-size: 0.9rem;">
-                        <option value="S">Small (S)</option>
-                        <option value="M" selected>Medium (M)</option>
-                        <option value="L">Large (L)</option>
-                        <option value="XL">X-Large (XL)</option>
-                    </select>
-                </div>
-                <div style="margin-top: 8px;">
-                    <label style="font-size: 12px; color: #555; display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                        <input type="checkbox" class="enable-alteration-checkbox"> Request Alterations (+Changes)
-                    </label>
-                    <input type="text" class="alteration-notes-input" placeholder="e.g. remove puffy sleeves" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; display: none;">
-                </div>
-                <button class="btn-primary add-to-cart-btn" data-id="${item.id || 'catalog-' + index}" data-name="${item.name}" data-price="${item.price}" style="width: 100%; margin-top: 10px; padding: 10px; font-size: 0.9rem;">Add to Cart</button>
-            `;
-
-            const alterationCheckbox = itemCard.querySelector('.enable-alteration-checkbox');
-            const alterationInput = itemCard.querySelector('.alteration-notes-input');
-            alterationCheckbox.onchange = () => {
-                alterationInput.style.display = alterationCheckbox.checked ? 'block' : 'none';
-            };
-
-            storefrontContainer.appendChild(itemCard);
-        });
-
-        const addToCartButtons = storefrontContainer.querySelectorAll('.add-to-cart-btn');
-        addToCartButtons.forEach(btn => {
-            btn.onclick = (e) => {
-                const card = e.target.closest('div').parentElement;
-                const sizeSelect = card.querySelector('.cart-size-select');
-                const alterationCheckbox = card.querySelector('.enable-alteration-checkbox');
-                const alterationInput = card.querySelector('.alteration-notes-input');
-                
-                const itemName = btn.getAttribute('data-name');
-                const itemPrice = Number(btn.getAttribute('data-price'));
-                const selectedSize = sizeSelect.value;
-                const alterationText = alterationCheckbox.checked ? alterationInput.value.trim() : 'None';
-
-                cartState.items.push({
-                    name: itemName,
-                    price: itemPrice,
-                    size: selectedSize,
-                    alterations: alterationText
-                });
-                
-                cartState.total += itemPrice;
-
-                updateCartUI();
-                alert(`${itemName} (Size: ${selectedSize}) added to cart!`);
-            };
-        });
-
-    } catch (error) {
-        console.error("Error loading products:", error);
-    }
-}
-
-function updateCartUI() {
-    const cartCountEl = document.getElementById('cart-item-count');
-    const cartTotalEl = document.getElementById('cart-total-amount');
-    const cartItemsContainer = document.getElementById('cart-items-container');
-
-    if (cartCountEl) cartCountEl.textContent = cartState.items.length;
-    if (cartTotalEl) cartTotalEl.textContent = `R${cartState.total}`;
-
-    if (cartItemsContainer) {
-        cartItemsContainer.innerHTML = '';
-        if (cartState.items.length === 0) {
-            cartItemsContainer.innerHTML = `<p style="color: #777; text-align: center;">Your cart is empty.</p>`;
-            return;
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fa-headset').forEach(icon => {
+        const parentLink = icon.closest('a');
+        if (parentLink) {
+            parentLink.href = 'clientmessages.html';
         }
+    });
 
-        cartState.items.forEach((cartItem, index) => {
-            const itemRow = document.createElement('div');
-            itemRow.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;";
-            itemRow.innerHTML = `
-                <div>
-                    <strong>${cartItem.name}</strong> <span style="font-size: 12px; color: #777;">(Size: ${cartItem.size})</span>
-                    ${cartItem.alterations !== 'None' ? `<br><span style="font-size: 11px; color: #d32f2f; font-weight: bold;">Alteration Request: ${cartItem.alterations}</span>` : ''}
-                </div>
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <span style="font-weight: bold;">R${cartItem.price}</span>
-                    <button class="remove-cart-item" data-index="${index}" style="background: #ffebee; color: #d32f2f; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">Remove</button>
-                </div>
-            `;
-            cartItemsContainer.appendChild(itemRow);
-        });
-
-        const removeButtons = cartItemsContainer.querySelectorAll('.remove-cart-item');
-        removeButtons.forEach(remBtn => {
-            remBtn.onclick = (e) => {
-                const idx = Number(remBtn.getAttribute('data-index'));
-                cartState.total -= cartState.items[idx].price;
-                cartState.items.splice(idx, 1);
-                updateCartUI();
-            };
-        });
-    }
-}
-
-const checkoutForm = document.getElementById('checkout-form');
-if (checkoutForm) {
-    checkoutForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (cartState.items.length === 0) {
-            alert("Your cart is empty! Add items before checking out.");
-            return;
-        }
-
-        const customerName = document.getElementById('checkout-customer-name').value.trim();
-        const customerEmail = document.getElementById('checkout-customer-email').value.trim();
-        const customerPhone = document.getElementById('checkout-customer-phone').value.trim();
-        const deliveryAddress = document.getElementById('checkout-delivery-address').value.trim();
-
-        const fullNameClean = formatCleanFullName(customerName);
-        const nameParts = fullNameClean.split(' ');
-        const firstName = nameParts[0] || '';
-        const surname = nameParts.slice(1).join(' ') || '';
-
-        try {
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
             const user = auth.currentUser;
-            if (user) {
-                const clientQuery = query(collection(db, "clients"), where("email", "==", user.email));
-                const clientSnap = await getDocs(clientQuery);
-                if (!clientSnap.empty) {
-                    const clientDocRef = doc(db, "clients", clientSnap.docs[0].id);
-                    await updateDoc(clientDocRef, { 
-                        deliveryAddress: deliveryAddress,
-                        phone: customerPhone 
-                    });
-                }
+            if (!user) {
+                alert("Please sign in to add items to your cart.");
+                window.location.href = 'ClientSignIn.html';
+                return;
             }
 
-            const qAllOrders = query(collection(db, "orders"), orderBy("timestamp", "asc"));
-            const allOrdersSnapshot = await getDocs(qAllOrders);
-            
-            let nextOrderInt = 1;
-            if (!allOrdersSnapshot.empty) {
-                let maxNum = 0;
-                allOrdersSnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    if (data.orderNumber) {
-                        const numPart = parseInt(data.orderNumber.replace(/\D/g, ''), 10);
-                        if (!isNaN(numPart) && numPart > maxNum) {
-                            maxNum = numPart;
-                        }
-                    }
+            const card = e.target.closest('.product-card');
+            const name = btn.getAttribute('data-name');
+            const price = Number(btn.getAttribute('data-price'));
+            const size = card.querySelector('.cart-size-select').value;
+            const customIdea = card.querySelector('.alteration-notes-input').value.trim() || 'None';
+
+            try {
+                await addDoc(collection(db, "cart"), {
+                    userEmail: user.email,
+                    itemName: name,
+                    price: price,
+                    size: size,
+                    customIdea: customIdea,
+                    timestamp: new Date()
                 });
-                nextOrderInt = maxNum + 1;
+                updateHeaderBadges(user);
+                alert(`${name} (Size: ${size}) added to cart!`);
+            } catch (err) {
+                alert("Error adding to cart: " + err.message);
             }
-            
-            const formattedNumber = nextOrderInt.toString().padStart(2, '0');
-            const newOrderNumber = `Order #${formattedNumber}`;
-
-            const itemSummary = cartState.items.map(i => `${i.name} [Size: ${i.size}] ${i.alterations !== 'None' ? '- Alteration Request: ' + i.alterations : ''}`).join('; ');
-
-            await addDoc(collection(db, "orders"), {
-                orderNumber: newOrderNumber,
-                customer: fullNameClean,
-                clientFirstName: firstName,
-                clientSurname: surname,
-                email: customerEmail,
-                phone: customerPhone,
-                deliveryAddress: deliveryAddress,
-                orderDate: new Date().toISOString().split('T')[0],
-                description: `Ready-Made Purchase: ${itemSummary}`,
-                fabricType: 'Ready-Made Stock',
-                threadType: 'None',
-                accessoryType: 'None',
-                amount: cartState.total,
-                status: 'Processing',
-                timestamp: new Date()
-            });
-
-            cartState.items = [];
-            cartState.total = 0;
-            updateCartUI();
-            checkoutForm.reset();
-
-            alert(`Checkout successful! Order reference (${newOrderNumber}) has been placed.`);
-        } catch (error) {
-            alert("Checkout failed: " + error.message);
-        }
-    });
-}
-
-function initAddressAutocomplete() {
-    const addressInput = document.getElementById('checkout-delivery-address');
-    if (!addressInput || typeof google === 'undefined' || !google.maps || !google.maps.places) return;
-
-    const autocomplete = new google.maps.places.Autocomplete(addressInput, {
-        types: ['address'],
-        componentRestrictions: { country: ['za'] }
+        });
     });
 
-    autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place.formatted_address) {
-            addressInput.value = place.formatted_address;
-        }
-    });
-}
+    document.querySelectorAll('.add-to-wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const user = auth.currentUser;
+            if (!user) {
+                alert("Please sign in to add items to your wishlist.");
+                window.location.href = 'ClientSignIn.html';
+                return;
+            }
 
-window.addEventListener('load', () => {
-    setTimeout(initAddressAutocomplete, 1000);
+            const name = btn.getAttribute('data-name');
+            const price = Number(btn.getAttribute('data-price'));
+            const image = btn.getAttribute('data-image');
+
+            try {
+                await addDoc(collection(db, "wishlist"), {
+                    userEmail: user.email,
+                    itemName: name,
+                    price: price,
+                    imageUrl: image,
+                    timestamp: new Date()
+                });
+                updateHeaderBadges(user);
+                alert(`${name} added to your wishlist!`);
+            } catch (err) {
+                alert("Error adding to wishlist: " + err.message);
+            }
+        });
+    });
+
+    const cartPageContainer = document.getElementById('cart-page-items-container');
+    if (cartPageContainer) {
+        loadCartPageData();
+    }
+
+    const wishlistPageContainer = document.getElementById('wishlist-page-grid');
+    if (wishlistPageContainer) {
+        loadWishlistPageData();
+    }
+
+    const chatContainer = document.getElementById('chat-messages-container');
+    if (chatContainer) {
+        initTailorChat();
+    }
 });
 
-loadStorefrontProducts();
-updateCartUI();
+async function loadCartPageData() {
+    const container = document.getElementById('cart-page-items-container');
+    const totalEl = document.getElementById('cart-page-total');
+    const checkoutBtn = document.getElementById('cart-page-checkout-btn');
 
-function setWebsiteFavicon() {
-    let existingLink = document.querySelector("link[rel~='icon']");
-    if (!existingLink) {
-        let link = document.createElement('link');
-        link.rel = 'icon';
-        link.type = 'image/png';
-        link.href = '../Images/logo.png'; 
-        document.head.appendChild(link);
-    }
-}
-window.addEventListener('load', setWebsiteFavicon);
-
-function makePagesMobileResponsive() {
-    if (window.innerWidth <= 768) {
-        const wrapper = document.querySelector('.dashboard-wrapper');
-        if (wrapper && wrapper.style.flexDirection !== 'column') {
-            wrapper.style.cssText = "display: flex; flex-direction: column; height: auto; min-height: 100vh; overflow-y: auto;";
-        }
-        
-        const sidebar = document.querySelector('ul');
-        if (sidebar) {
-            sidebar.style.cssText = "width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; justify-content: space-around; padding: 10px;";
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            container.innerHTML = `<p style="text-align: center; color: #777; padding: 20px;">Please sign in to view your cart.</p>`;
+            return;
         }
 
-        const mainContent = document.querySelector('.main-content');
-        if (mainContent) {
-            mainContent.style.cssText = "flex: 1; width: 100%; overflow-x: hidden;";
-        }
+        try {
+            const q = query(collection(db, "cart"), where("userEmail", "==", user.email));
+            const snapshot = await getDocs(q);
 
-        const storeGrids = document.querySelectorAll('.dashboard-body > div');
-        storeGrids.forEach(grid => {
-            if (grid.style.gridTemplateColumns) {
-                grid.style.gridTemplateColumns = "1fr";
+            container.innerHTML = '';
+            if (snapshot.empty) {
+                container.innerHTML = `<p style="text-align: center; color: #777; padding: 20px;">Your cart is empty.</p>`;
+                if (totalEl) totalEl.textContent = 'R 0.00';
+                return;
             }
-        });
-    }
+
+            let total = 0;
+            snapshot.forEach((docSnap) => {
+                const item = docSnap.data();
+                const docId = docSnap.id;
+                total += Number(item.price);
+
+                const row = document.createElement('div');
+                row.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee;";
+                row.innerHTML = `
+                    <div>
+                        <strong style="font-size: 1.1rem; color: #1c2841;">${item.itemName}</strong><br>
+                        <span style="font-size: 0.9rem; color: #666;">Size: <b>${item.size}</b> | Custom Idea: <i>${item.customIdea}</i></span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <span style="font-weight: 800; color: #d96c06; font-size: 1.1rem;">R ${item.price}.00</span>
+                        <button class="remove-cart-db-btn" data-id="${docId}" style="background: #ffebee; color: #d32f2f; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Remove</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            if (totalEl) totalEl.textContent = `R ${total}.00`;
+
+            container.querySelectorAll('.remove-cart-db-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    const id = btn.getAttribute('data-id');
+                    try {
+                        await deleteDoc(doc(db, "cart", id));
+                        loadCartPageData();
+                        updateHeaderBadges(user);
+                    } catch (err) {
+                        alert("Error removing item: " + err.message);
+                    }
+                };
+            });
+
+            if (checkoutBtn) {
+                checkoutBtn.onclick = () => {
+                    const selectedPayment = document.querySelector('input[name="payment-method"]:checked');
+                    const paymentMethod = selectedPayment ? selectedPayment.value.toUpperCase() : 'EFT';
+                    alert(`Order placed successfully via ${paymentMethod}! Total: R ${total}.00`);
+                };
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    });
 }
 
-window.addEventListener('load', makePagesMobileResponsive);
-window.addEventListener('resize', makePagesMobileResponsive);
+async function loadWishlistPageData() {
+    const grid = document.getElementById('wishlist-page-grid');
+
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            grid.innerHTML = `<p style="text-align: center; color: #777; padding: 20px; grid-column: 1 / -1;">Please sign in to view your wishlist.</p>`;
+            return;
+        }
+
+        try {
+            const q = query(collection(db, "wishlist"), where("userEmail", "==", user.email));
+            const snapshot = await getDocs(q);
+
+            grid.innerHTML = '';
+            if (snapshot.empty) {
+                grid.innerHTML = `<p style="text-align: center; color: #777; padding: 20px; grid-column: 1 / -1;">Your wishlist is empty.</p>`;
+                return;
+            }
+
+            snapshot.forEach((docSnap) => {
+                const item = docSnap.data();
+                const docId = docSnap.id;
+
+                const card = document.createElement('article');
+                card.className = "product-card";
+                card.style.cssText = "background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column;";
+                card.innerHTML = `
+                    <div style="width: 100%; height: 320px; overflow: hidden; background: #f9f9f9; position: relative;">
+                        <img src="${item.imageUrl}" alt="${item.itemName}" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                    </div>
+                    <div style="padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #1c2841; margin: 0;">${item.itemName}</h3>
+                        <p style="font-weight: 800; color: #d96c06; font-size: 1.2rem; margin: 0;">R ${item.price}.00</p>
+                        <button class="remove-wishlist-db-btn" data-id="${docId}" style="background: #ffebee; color: #d32f2f; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: auto;">Remove from Wishlist</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            grid.querySelectorAll('.remove-wishlist-db-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    const id = btn.getAttribute('data-id');
+                    try {
+                        await deleteDoc(doc(db, "wishlist", id));
+                        loadWishlistPageData();
+                        updateHeaderBadges(user);
+                    } catch (err) {
+                        alert("Error removing item: " + err.message);
+                    }
+                };
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+}
+
+function initTailorChat() {
+    const chatContainer = document.getElementById('chat-messages-container');
+    const chatForm = document.getElementById('chat-send-form');
+    const chatInput = document.getElementById('chat-input-text');
+
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            chatContainer.innerHTML = `<p style="text-align: center; color: #777; padding: 20px;">Please sign in to chat with the tailor team.</p>`;
+            return;
+        }
+
+        async function fetchMessages() {
+            try {
+                const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+                const snapshot = await getDocs(q);
+
+                chatContainer.innerHTML = '';
+                let count = 0;
+
+                snapshot.forEach((docSnap) => {
+                    const msg = docSnap.data();
+                    if (msg.userEmail === user.email || msg.clientEmail === user.email) {
+                        count++;
+                        const isClient = msg.sender === 'client';
+                        const bubble = document.createElement('div');
+                        bubble.style.cssText = `max-width: 70%; padding: 12px 18px; border-radius: 10px; font-size: 14px; align-self: ${isClient ? 'flex-end' : 'flex-start'}; background: ${isClient ? '#d96c06' : '#f4f7f6'}; color: ${isClient ? 'white' : '#1c2841'}; box-shadow: 0 2px 5px rgba(0,0,0,0.05);`;
+                        bubble.innerHTML = `<strong>${isClient ? 'You' : 'Tailor Team'}:</strong><br>${msg.text}`;
+                        chatContainer.appendChild(bubble);
+                    }
+                });
+
+                if (count === 0) {
+                    chatContainer.innerHTML = `<p style="color: #777; text-align: center;">No messages yet. Start a conversation with our tailor team below!</p>`;
+                }
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } catch (err) {
+                console.error("Error loading messages:", err);
+            }
+        }
+
+        fetchMessages();
+
+        if (chatForm && !chatForm.hasAttribute('data-bound')) {
+            chatForm.setAttribute('data-bound', 'true');
+            chatForm.onsubmit = async (e) => {
+                e.preventDefault();
+                const text = chatInput.value.trim();
+                if (!text) return;
+
+                try {
+                    await addDoc(collection(db, "messages"), {
+                        userEmail: user.email,
+                        clientEmail: user.email,
+                        sender: 'client',
+                        text: text,
+                        timestamp: new Date()
+                    });
+
+                    chatInput.value = '';
+                    fetchMessages();
+                } catch (err) {
+                    alert("Failed to send message: " + err.message);
+                }
+            };
+        }
+    });
+}
+
+const translations = {
+    en: {
+        "nav-all": "All",
+        "nav-women": "Women",
+        "nav-curve": "Curve",
+        "nav-kids": "Kids",
+        "nav-men": "Men",
+        "nav-traditional": "Traditional Attire",
+        "nav-accessories": "Accessories",
+        "hero-title": "NEW ARRIVALS<br>STREET & TRADITIONAL",
+        "hero-sub": "Discover the latest drops. Premium quality, expertly tailored.",
+        "hero-btn": "SHOP THE COLLECTION",
+        "cat-women": "Women",
+        "cat-curve": "Curve",
+        "cat-kids": "Kids",
+        "cat-men": "Men",
+        "cat-traditional": "Traditional",
+        "cat-accessories": "Accessories"
+    },
+    zu: {
+        "nav-all": "Konke",
+        "nav-women": "Abesifazane",
+        "nav-curve": "Ama-Curve",
+        "nav-kids": "Izingane",
+        "nav-men": "Abesilisa",
+        "nav-traditional": "Izingubo Zesintu",
+        "nav-accessories": "Izesekeli",
+        "hero-title": "OKUSHA OKUFIKILE<br>KWESIMANJE NOSIKO",
+        "hero-sub": "Thola okusha. Ikhwalithi ephezulu, kuthungwe ngobunyoninco.",
+        "hero-btn": "THENGA IQOQO",
+        "cat-women": "Abesifazane",
+        "cat-curve": "Ama-Curve",
+        "cat-kids": "Izingane",
+        "cat-men": "Abesilisa",
+        "cat-traditional": "Ezesintu",
+        "cat-accessories": "Izesekeli"
+    },
+    xh: {
+        "nav-all": "Konke",
+        "nav-women": "Abafazi",
+        "nav-curve": "Goso",
+        "nav-kids": "Abantwana",
+        "nav-men": "Amadoda",
+        "nav-traditional": "Iimpahla Zesintu",
+        "nav-accessories": "Izincedisi",
+        "hero-title": "EZINTSHA EZIFIKILEYO<br>EZEZITALATO NESINTU",
+        "hero-sub": "Fumanisa ezamva nje. Umgangatho ophezulu, zithungwe ngobuchule.",
+        "hero-btn": "THENGA INGQOKELELA",
+        "cat-women": "Abafazi",
+        "cat-curve": "Goso",
+        "cat-kids": "Abantwana",
+        "cat-men": "Amadoda",
+        "cat-traditional": "Ezesintu",
+        "cat-accessories": "Izincedisi"
+    },
+    st: {
+        "nav-all": "Tsohle",
+        "nav-women": "Basali",
+        "nav-curve": "Mekolokolo",
+        "nav-kids": "Bana",
+        "nav-men": "Banna",
+        "nav-traditional": "Liaparo tsa Setso",
+        "nav-accessories": "Lisebelisoa",
+        "hero-title": "TSE NCHA TSE FIHLILENG<br>TSA SEJWALEJWALE LE TSA SETSO",
+        "hero-sub": "Fumana tse ncha. Boleng bo phahameng, tse rokilweng hantle.",
+        "hero-btn": "REKA KOKETSO",
+        "cat-women": "Basali",
+        "cat-curve": "Mekolokolo",
+        "cat-kids": "Bana",
+        "cat-men": "Banna",
+        "cat-traditional": "Setso",
+        "cat-accessories": "Lisebelisoa"
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const selectedLang = this.getAttribute('data-lang');
+            
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[selectedLang] && translations[selectedLang][key]) {
+                    element.innerHTML = translations[selectedLang][key];
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.curr-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const selectedCurr = this.getAttribute('data-curr');
+            
+            document.querySelectorAll('.dynamic-price').forEach(priceElement => {
+                if (selectedCurr === 'zar') {
+                    const zarPrice = priceElement.getAttribute('data-price-zar');
+                    if (zarPrice) priceElement.textContent = `R ${zarPrice}`;
+                } else if (selectedCurr === 'usd') {
+                    const usdPrice = priceElement.getAttribute('data-price-usd');
+                    if (usdPrice) priceElement.textContent = `$ ${usdPrice}`;
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.product-card').forEach(card => {
+        const checkbox = card.querySelector('.enable-alteration-checkbox');
+        const textarea = card.querySelector('.alteration-notes-input');
+        if (checkbox && textarea) {
+            checkbox.addEventListener('change', () => {
+                textarea.style.display = checkbox.checked ? 'block' : 'none';
+            });
+        }
+    });
+});

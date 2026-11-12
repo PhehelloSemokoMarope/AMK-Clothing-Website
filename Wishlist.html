@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Your Wishlist</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <h2 style="color: #1c2841; font-size: 2rem; margin-bottom: 20px; font-weight: 800;">My Wishlist</h2>
+        
+        <section id="wishlist-page-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+            <p style="text-align: center; color: #777; padding: 20px; grid-column: 1 / -1;">Loading wishlist...</p>
+        </section>
+    </main>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

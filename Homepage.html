@@ -1,148 +1,123 @@
+<!-- Homepage.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing - Dashboard</title>
-  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+  <title>AMK Clothing | Official Store</title>
+  <link rel="stylesheet" href="StyleSheet.css">
 </head>
-<body>
-  <div class="dashboard-wrapper">
-   
-    <ul>
-      <li class="sidebar">
-        <div class="icon-box">
-          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
-        </div>
-        <div class="AMK-text">
-          <span class="AMK-title">FDMS</span>
-          <span class="AMK-subtitle">Fashion Design Management</span>
-        </div>
-      </li>
-     
-      <li><a href="Homepage.html" class="active">Dashboard</a></li>
-      <li><a href="CustomerManagement.html">Customer Management</a></li>
-     
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Order Management</a>
-        <div class="dropdown-content">
-          <a href="CreateOrder.html">Create Order</a>
-          <a href="UpdateOrder.html">Update Status</a>
-          <a href="RecordMeasurements.html">Record Measurements</a>
-        </div>
-      </li>
-     
-      <li><a href="AdminMessages.html">Client Chats</a></li>
-      
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Payment Management</a>
-        <div class="dropdown-content">
-          <a href="ProcessPayment.html">Process Payment</a>
-          <a href="Invoices.html">Invoices</a>
-        </div>
-      </li>
-     
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Inventory Management</a>
-        <div class="dropdown-content">
-          <a href="AddItems.html">Add Item</a>
-          <a href="UpdateStock.html">Update Stock</a>
-          <a href="LowStock.html">Low Stock Alerts</a>
-        </div>
-      </li>
-
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Reports</a>
-        <div class="dropdown-content">
-          <a href="SalesReport.html">Sales</a>
-          <a href="InventoryReport.html">Inventory</a>
-          <a href="CustomerOrderReport.html">Customer Orders</a>
-        </div>
-      </li>
-
- 
-    </ul>
-
-    <div class="main-content">
-     
-      <header class="top-header">
-        <div class="header-left">
-          <h2>Dashboard</h2>
-          <p>Wednesday, 2 September 2026</p>
-        </div>
-       
-        <div class="header-right">
-          <div class="profile-info">
-            <img src="../Images/user.png" alt="Profile" class="profile-icon">
-            <div class="profile-text">
-              <span class="profile-name" id="header-profile-name">Fashion Designer</span>
-              <span class="profile-role" id="header-profile-role">Administrator</span>
-            </div>
-          </div>
-          <button class="logout-btn">Logout</button>
-        </div>
-      </header>
-
-      <main class="dashboard-body">
-        <div class="welcome-banner" style="background: #00796b; color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h1 style="margin: 0 0 10px 0; font-size: 24px;">Welcome back, <span class="profile-name">Fashion Designer</span>!</h1>
-            <p style="margin: 0; opacity: 0.9;">Here's a quick overview of your fashion design studio today.</p>
-          </div>
-          <div>
-            <img src="../Images/scissors.png" alt="Logo" style="width: 50px; height: 50px; filter: brightness(0) invert(1);">
-          </div>
-        </div>
-
-        <div class="cards-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
-          <div class="card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-            <span style="font-size: 12px; color: #777; font-weight: bold;">TOTAL ORDERS</span>
-            <h2 id="total-orders-count" style="font-size: 28px; margin: 10px 0 0 0; color: #333;">0</h2>
-          </div>
-
-          <div class="card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-            <span style="font-size: 12px; color: #777; font-weight: bold;">PENDING PAYMENTS</span>
-            <h2 id="pending-payments-amount" style="font-size: 28px; margin: 10px 0 0 0; color: #333;">R0</h2>
-          </div>
-
-          <div class="card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-            <span style="font-size: 12px; color: #777; font-weight: bold;">ACTIVE CUSTOMERS</span>
-            <h2 id="active-customers-count" style="font-size: 28px; margin: 10px 0 0 0; color: #333;">0</h2>
-          </div>
-
-          <div class="card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-            <span style="font-size: 12px; color: #777; font-weight: bold;">LOW STOCK ITEMS</span>
-            <h2 id="low-stock-count" style="font-size: 28px; margin: 10px 0 0 0; color: #333;">0</h2>
-          </div>
-        </div>
-
-        <div class="table-container" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-          <div class="table-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <div>
-              <h3 style="margin: 0; color: #333;">Recent Orders</h3>
-              <p style="margin: 5px 0 0 0; font-size: 13px; color: #777;">Latest orders overview</p>
-            </div>
-            <button class="btn-secondary" style="padding: 8px 16px; border: 1px solid #ccc; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 600;">View All</button>
-          </div>
-
-          <table class="data-table" style="width: 100%; border-collapse: collapse;">
-            <thead>
-              <tr style="text-align: left; border-bottom: 2px solid #eee; color: #555;">
-                <th style="padding: 10px;">ORDER ID</th>
-                <th style="padding: 10px;">CUSTOMER</th>
-                <th style="padding: 10px;">DATE</th>
-                <th style="padding: 10px;">STATUS</th>
-                <th style="padding: 10px;">AMOUNT</th>
-              </tr>
-            </thead>
-            <tbody id="recent-orders-body">
-            </tbody>
-          </table>
-        </div>
-      </main>
-    </div>
+<body class="ecom-body">
+  
+  <div class="promo-bar">
+    FREE STANDARD SHIPPING ON ORDERS OVER R500 | 100% SECURE CHECKOUT
   </div>
 
-  <script type="module" src="../Javascript/app.js"></script>
+  <header class="ecom-header">
+    <div class="logo">
+      <a href="Homepage.html">AMK<span>CLOTHING</span></a>
+    </div>
+    
+    <div class="search-bar">
+      <input type="text" placeholder="Search for dresses, kids, accessories...">
+      <button type="button">Search</button>
+    </div>
+
+    <div class="nav-icons">
+      <a href="ClientSignIn.html">
+        <span class="icon">👤</span>
+        <span>Sign In</span>
+      </a>
+      <a href="ClientStore.html">
+        <span class="icon">🛒</span>
+        <span>Cart (0)</span>
+      </a>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <a href="#" class="active-cat">Women</a>
+    <a href="#">Men</a>
+    <a href="#">Kids</a>
+    <a href="#">Curve</a>
+    <a href="#">Accessories</a>
+    <a href="#" style="color: #d96c06;">Sale</a>
+  </nav>
+
+  <main>
+    <section class="ecom-hero">
+      <div class="hero-image">
+        <img src="Images/Outfit_Pics/Image (1).jpg" alt="Summer Collection">
+      </div>
+      <div class="hero-text">
+        <h1>NEW SEASON<br><span>ARRIVALS</span></h1>
+        <p>Refresh your wardrobe with our latest traditional and modern blends.</p>
+        <a href="ClientStore.html" class="btn-primary">Shop Now</a>
+      </div>
+    </section>
+
+    <section class="shop-by-category">
+      <h2 class="section-title">Shop By Category</h2>
+      <div class="category-circles">
+        <a href="#" class="cat-circle">
+          <img src="Images/Outfit_Pics/Image (10).jpg" alt="Women">
+          <span>Women</span>
+        </a>
+        <a href="#" class="cat-circle">
+          <img src="Images/Outfit_Pics/Image (11).jpg" alt="Men">
+          <span>Men</span>
+        </a>
+        <a href="#" class="cat-circle">
+          <img src="Images/Outfit_Pics/Image (12).jpg" alt="Kids">
+          <span>Kids</span>
+        </a>
+        <a href="#" class="cat-circle">
+          <img src="Images/Outfit_Pics/Image (13).jpg" alt="Accessories">
+          <span>Accessories</span>
+        </a>
+        <a href="#" class="cat-circle">
+          <img src="Images/Outfit_Pics/Image (14).jpg" alt="Custom">
+          <span>Custom</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="trending-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="store-grid">
+        <article class="product-card">
+          <img src="Images/Outfit_Pics/Image (15).jpg" alt="Printed Dress">
+          <div class="product-info">
+            <h3>Printed Maxi Dress</h3>
+            <p>R 450.00</p>
+          </div>
+        </article>
+        
+        <article class="product-card">
+          <img src="Images/Outfit_Pics/Image (16).jpg" alt="Kids Outfit">
+          <div class="product-info">
+            <h3>Kids Traditional Set</h3>
+            <p>R 299.00</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="Images/Outfit_Pics/Image (17).jpg" alt="Men Shirt">
+          <div class="product-info">
+            <h3>Mens Indigo Shirt</h3>
+            <p>R 350.00</p>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="Images/Outfit_Pics/Image (18).jpg" alt="Accessories">
+          <div class="product-info">
+            <h3>Beaded Necklace</h3>
+            <p>R 120.00</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

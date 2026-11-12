@@ -3,30 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMK Clothing - Welcome</title>
-    <link rel="stylesheet" href="../Styling/StyleSheet.css">
+    <title>AMK Clothing | Official Store</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="welcome-body">
+<body class="ecom-body">
 
-    <div id="splash-screen">
-        <h1>Welcome to the<br>AMK Clothing App</h1>
-        <div class="swipe-indicator">Tap or Swipe Up</div>
-    </div>
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+        <div class="search-bar-dark">
+            <input type="text" placeholder="Search custom dresses, suits...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
 
-    <div id="role-selection">
-        <a href="ClientSignIn.html" class="role-card">
-            <h2>Customer</h2>
-            <p>Shop the latest fashion and manage your orders.</p>
-            <div class="btn">Sign In as Customer</div>
-        </a>
+        <div class="nav-icons-dark">
+            <!-- Dynamic User Header Container -->
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
 
-        <a href="SignIn.html" class="role-card admin-card">
-            <h2>Admin</h2>
-            <p>Manage store inventory, orders, and clients.</p>
-            <div class="btn">Sign In as Admin</div>
-        </a>
-    </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="#"><i class="fas fa-headset"></i></a>
+                
+                <div class="nav-dropdown">
+                    <a href="#" class="globe-icon"><i class="fas fa-globe"></i></a>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+  <nav class="category-nav">
+        <a href="ClientAll.html" data-translate="nav-all">All</a>
+        <a href="clientwomen.html" data-translate="nav-women">Women</a>
+        <a href="CliemtCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+    </nav>
 
-    <script type="module" src="../Javascript/app.js"></script>
+    <main>
+        <section class="ecom-hero-full">
+            <div class="hero-text-center">
+                <h1 data-translate="hero-title">NEW ARRIVALS<br>STREET & TRADITIONAL</h1>
+                <p data-translate="hero-sub">Discover the latest drops. Premium quality, expertly tailored.</p>
+                <a href="clientwomen.html" class="btn-white" data-translate="hero-btn">SHOP THE COLLECTION</a>
+            </div>
+        </section>
+
+        <section class="shop-by-category-circles">
+            <div class="category-circles-container">
+                <a href="clientwomen.html" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (19).jpg" alt="Women"></div>
+                    <span data-translate="cat-women">Women</span>
+                </a>
+                <a href="#" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (33).jpg" alt="Curve"></div>
+                    <span data-translate="cat-curve">Curve</span>
+                </a>
+                <a href="#" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (50).jpg" alt="Kids"></div>
+                    <span data-translate="cat-kids">Kids</span>
+                </a>
+                <a href="#" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (27).jpg" alt="Men"></div>
+                    <span data-translate="cat-men">Men</span>
+                </a>
+                <a href="#" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (28).jpg" alt="Traditional"></div>
+                    <span data-translate="cat-traditional">Traditional</span>
+                </a>
+                <a href="#" class="cat-circle-item">
+                    <div class="circle-img-wrapper"><img src="Images/Outfit_Pics/Image (31).jpg" alt="Accessories"></div>
+                    <span data-translate="cat-accessories">Accessories</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="clientwomen.html">Women</a>
+                <a href="#">Men</a>
+                <a href="#">Kids</a>
+                <a href="#">Traditional Attire</a>
+                <a href="#">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Track Order</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Size Guide</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="#">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
 </body>
 </html>

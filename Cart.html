@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Your Cart</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        <h2 style="color: #1c2841; font-size: 2rem; margin-bottom: 20px; font-weight: 800;">Shopping Cart</h2>
+        
+        <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div id="cart-page-items-container">
+                <p style="text-align: center; color: #777; padding: 20px;">Loading cart items...</p>
+            </div>
+
+            <div style="background: #fcf9f2; padding: 20px; border-radius: 8px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; font-size: 1.2rem; color: #1c2841;">Total Amount:</span>
+                <span id="cart-page-total" style="font-weight: 800; font-size: 1.5rem; color: #d96c06;">R 0.00</span>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h4 style="color: #1c2841; margin-bottom: 15px; font-size: 1.1rem;">Select Respective Payment Method:</h4>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <label style="display: flex; align-items: center; gap: 12px; background: #f4f7f6; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; color: #333;">
+                        <input type="radio" name="payment-method" value="eft" checked> Direct Bank Transfer (EFT) - Standard Bank / FNB
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; background: #f4f7f6; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; color: #333;">
+                        <input type="radio" name="payment-method" value="card"> Credit / Debit Card (Secure PayFast Gateway)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; background: #f4f7f6; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; color: #333;">
+                        <input type="radio" name="payment-method" value="ozow"> Instant EFT / Ozow Mobile Payment
+                    </label>
+                </div>
+            </div>
+
+            <button id="cart-page-checkout-btn" class="btn-auth" style="width: 100%; margin-top: 30px; padding: 15px; font-size: 1.1rem;">Complete Secure Checkout</button>
+        </div>
+    </main>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

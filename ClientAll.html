@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | All Products</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+        <div class="search-bar-dark">
+            <input type="text" placeholder="Search all clothing, items...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="clientmessages.html"><i class="fas fa-headset"></i></a>
+            </div>
+        </div>
+    </header>
+
+     <nav class="category-nav">
+        <a href="ClientAll.html" data-translate="nav-all">All</a>
+        <a href="clientwomen.html" data-translate="nav-women">Women</a>
+        <a href="CliemtCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+    </nav>
+
+    <main>
+        <section class="ecom-hero-full">
+            <div class="hero-text-center">
+                <h1>ALL COLLECTIONS</h1>
+                <p>Browse our complete catalog of bespoke African & fitted fashion.</p>
+            </div>
+        </section>
+
+        <section class="store-grid" id="storefront-product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 5%;">
+            <!-- Dynamically populated or standard catalog grid -->
+        </section>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="clientwomen.html">Women</a>
+                <a href="clientmen.html">Men</a>
+                <a href="clientkids.html">Kids</a>
+                <a href="clientaccessories.html">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Track Order</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Size Guide</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="clientmessages.html">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

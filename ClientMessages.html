@@ -1,58 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMK Clothing - Tailor Direct Messages</title>
-  <link rel="stylesheet" href="../Styling/StyleSheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Tailor Support Chat</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-  <div class="dashboard-wrapper">
-    <ul>
-      <li class="sidebar">
-        <div class="icon-box">
-          <img src="../Images/scissors.png" alt="Scissors" class="logo-icon">
-        </div>
-        <div class="AMK-text">
-          <span class="AMK-title">FDMS</span>
-          <span class="AMK-subtitle">Client Services</span>
-        </div>
-      </li>
-     
-      <li><a href="ClientPortal.html">Custom Orders</a></li>
-      <li><a href="ClientStore.html">Ready-Made Storefront</a></li>
-      <li><a href="ClientOrders.html">My Orders & Tracking</a></li>
-      <li><a href="ClientMessages.html" class="active" style="background-color: #3aafa9;">Messages & Tailor Chat</a></li>
-    </ul>
+<body class="ecom-body">
 
-    <div class="main-content">
-      <header class="top-header">
-        <div class="header-left">
-          <h2>Tailor Communication Hub</h2>
-          <p>Chat directly with your tailor regarding measurements, alterations, or custom requests.</p>
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
         </div>
-        <div class="header-right">
-      
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="clientmessages.html" style="color: #d96c06;"><i class="fas fa-headset"></i></a>
+            </div>
         </div>
-      </header>
+    </header>
 
-      <div class="dashboard-body">
-        <div class="table-container" style="display: flex; flex-direction: column; height: 70vh; padding: 25px;">
-          <h3 style="color: #2b7a78; margin-bottom: 15px;">Conversation with Design Team</h3>
-          
-          <div id="chat-messages-container" style="flex: 1; border: 1px solid #eee; border-radius: 8px; padding: 15px; overflow-y: auto; background: #f9f9f9; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px;">
-            <p style="color: #777; text-align: center;">Loading conversation...</p>
-          </div>
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; height: 600px;">
+            <div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px;">
+                <h2 style="color: #1c2841; font-size: 1.4rem;">Chat with the Tailor Team</h2>
+                <p style="color: #777; font-size: 0.85rem;">Discuss custom alterations, fittings, or order queries directly with our Johannesburg studio.</p>
+            </div>
 
-          <form id="chat-send-form" style="display: flex; gap: 10px;">
-            <input type="text" id="chat-input-text" required placeholder="Type your message to the tailor (e.g. correcting my waist measurement to 74cm)..." style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none;">
-            <button type="submit" class="btn-primary" style="padding: 0 25px;">Send Message</button>
-          </form>
+            <div id="chat-messages-container" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; padding-right: 10px; margin-bottom: 20px;">
+                <p style="color: #777; text-align: center;">Loading conversation...</p>
+            </div>
+
+            <form id="chat-send-form" style="display: flex; gap: 10px; border-top: 1px solid #eee; padding-top: 20px;">
+                <input type="text" id="chat-input-text" placeholder="Type your message or custom alteration request here..." required style="flex: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-size: 0.95rem;">
+                <button type="submit" class="btn-primary" style="padding: 12px 25px; border-radius: 8px; cursor: pointer;">Send</button>
+            </form>
         </div>
-      </div>
-    </div>
-  </div>
+    </main>
 
-  <script type="module" src="../Javascript/clientapp.js"></script>
+    <script type="module" src="Javascript/clientapp.js"></script>
 </body>
 </html>

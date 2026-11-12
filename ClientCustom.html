@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Custom Order Request</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+        <div class="search-bar-dark">
+            <input type="text" placeholder="Search...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="clientmessages.html"><i class="fas fa-headset"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <a href="ClientAll.html" data-translate="nav-all">All</a>
+        <a href="clientwomen.html" data-translate="nav-women">Women</a>
+        <a href="CliemtCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+    </nav>
+
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <div style="background: white; border-radius: 12px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <h2 style="color: #1c2841; font-size: 1.8rem; margin-bottom: 10px; font-weight: 800;">Request a Custom Order</h2>
+            <p style="color: #666; margin-bottom: 30px; font-size: 0.95rem;">Provide your specifications, reference design, and body measurements for a tailor-made creation.</p>
+
+            <form id="client-portal-form">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cp-name">Full Name</label>
+                        <input type="text" id="cp-name" required placeholder="Your full name">
+                    </div>
+                    <div class="input-group">
+                        <label for="cp-phone">Phone Number</label>
+                        <input type="tel" id="cp-phone" required placeholder="082 123 4567">
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cp-email">Email Address</label>
+                        <input type="email" id="cp-email" required placeholder="your.email@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="cp-garment">Garment Type / Style</label>
+                        <input type="text" id="cp-garment" required placeholder="e.g. Traditional Wedding Attire, Suit">
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cp-fabric">Fabric Preference</label>
+                        <input type="text" id="cp-fabric" placeholder="e.g. Shweshwe, Ankara, Silk">
+                    </div>
+                    <div class="input-group">
+                        <label for="cp-design-image">Reference Design Photo</label>
+                        <input type="file" id="cp-design-image" accept="image/*" required style="padding: 9px;">
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.1rem; color: #1c2841; margin: 25px 0 15px 0; border-left: 4px solid #d96c06; padding-left: 10px;">Body Measurements (cm)</h3>
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cp-bust">Bust / Chest</label>
+                        <input type="number" id="cp-bust" step="0.1" required placeholder="cm">
+                    </div>
+                    <div class="input-group">
+                        <label for="cp-waist">Waist</label>
+                        <input type="number" id="cp-waist" step="0.1" required placeholder="cm">
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cp-hips">Hips</label>
+                        <input type="number" id="cp-hips" step="0.1" required placeholder="cm">
+                    </div>
+                    <div class="input-group">
+                        <label for="cp-shoulder">Shoulder Width</label>
+                        <input type="number" id="cp-shoulder" step="0.1" required placeholder="cm">
+                    </div>
+                </div>
+
+                <div class="input-group full-width">
+                    <label for="cp-length">Desired Garment Length</label>
+                    <input type="number" id="cp-length" step="0.1" required placeholder="cm">
+                </div>
+
+                <div class="input-group full-width">
+                    <label for="cp-notes">Special Instructions / Custom Notes</label>
+                    <textarea id="cp-notes" placeholder="Any specific design adjustments or deadlines..." style="height: 100px;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Custom Order Request</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="clientwomen.html">Women</a>
+                <a href="clientmen.html">Men</a>
+                <a href="clientkids.html">Kids</a>
+                <a href="clientaccessories.html">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Track Order</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="clientmessages.html">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="clientmessages.html">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

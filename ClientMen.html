@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Men's Collection</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+        <div class="search-bar-dark">
+            <input type="text" placeholder="Search men's wear, shirts...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="clientmessages.html"><i class="fas fa-headset"></i></a>
+            </div>
+        </div>
+    </header>
+
+     <nav class="category-nav">
+        <a href="ClientAll.html" data-translate="nav-all">All</a>
+        <a href="clientwomen.html" data-translate="nav-women">Women</a>
+        <a href="CliemtCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+    </nav>
+
+    <main>
+        <section class="ecom-hero-full">
+            <div class="hero-text-center">
+                <h1>MEN'S COLLECTION</h1>
+                <p>Sharp tailoring, traditional print shirts, and heavy-duty wear up to 4XL.</p>
+            </div>
+        </section>
+
+        <section class="store-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 5%;">
+            <article class="product-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="width: 100%; height: 380px; overflow: hidden; background: #f9f9f9; position: relative;">
+                    <img src="Images/Outfit_Pics/Image (27).jpg" alt="Traditional Striped Collar Shirt" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                </div>
+                <div class="product-info" style="padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #1c2841; margin: 0;">Traditional Collar Shirt</h3>
+                    <p class="dynamic-price" data-price-zar="540.00" data-price-usd="29.99" style="font-weight: 800; color: #d96c06; font-size: 1.2rem; margin: 0;">R 540.00</p>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                        <select class="cart-size-select" style="flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #ddd; outline: none; font-size: 0.9rem;">
+                            <option value="S">Small (S)</option>
+                            <option value="M">Medium (M)</option>
+                            <option value="L" selected>Large (L)</option>
+                            <option value="XL">X-Large (XL)</option>
+                            <option value="2XL">2XL</option>
+                            <option value="3XL">3XL</option>
+                            <option value="4XL">4XL</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 12px; color: #555; display: flex; align-items: center; gap: 5px; cursor: pointer; margin-top: 5px;">
+                            <input type="checkbox" class="enable-alteration-checkbox"> Custom Idea / Alterations
+                        </label>
+                        <textarea class="alteration-notes-input" placeholder="Describe modifications..." style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; height: 60px; display: none; resize: vertical;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 15px;">
+                        <button class="btn-primary add-to-cart-btn" data-name="Traditional Collar Shirt" data-price="540" style="flex: 1; padding: 10px; font-size: 0.9rem; border-radius: 6px; cursor: pointer;">Add to Cart</button>
+                        <button class="btn-secondary add-to-wishlist-btn" data-name="Traditional Collar Shirt" data-price="540" data-image="Images/Outfit_Pics/Image (27).jpg" style="padding: 10px 15px; border-radius: 6px; border: 1px solid #d96c06; color: #d96c06; background: transparent; cursor: pointer;"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="clientwomen.html">Women</a>
+                <a href="clientmen.html">Men</a>
+                <a href="clientkids.html">Kids</a>
+                <a href="clientaccessories.html">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Track Order</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Size Guide</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="clientmessages.html">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>
