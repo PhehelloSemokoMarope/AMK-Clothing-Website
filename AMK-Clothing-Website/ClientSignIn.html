@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMK Clothing - Welcome</title>
+  <link rel="stylesheet" href="Styling/StyleSheet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="welcome-body">
+  
+  <div class="landing-container" style="display: flex; flex-direction: column; align-items: center; width: 100%; padding: 20px;">
+      
+      <div class="landing-header fade-in-top" style="text-align: center; margin-bottom: 40px; z-index: 10;">
+          <h1 style="color: #1c2841; font-size: 2.8rem; font-weight: 800; margin-bottom: 10px;">Welcome to AMK Clothing</h1>
+          <p style="color: #555; font-size: 1.1rem; font-weight: 500;">Please sign in or create a new account to continue.</p>
+      </div>
+
+      <div id="role-selection" class="landing-cards-wrapper" style="gap: 30px; max-width: 1000px; justify-content: center;">
+        
+        <a href="ClientSignInForm.html" class="role-card slide-left">
+          <h2>Sign In</h2>
+          <p>Welcome back! Access your account, track custom orders, and view your cart.</p>
+          <span class="btn">Sign In</span>
+        </a>
+        
+        <a href="ClientSignUp.html" class="role-card admin-card slide-right">
+          <h2 style="color: #fcd34d;">Sign Up</h2>
+          <p>New to AMK Clothing? Create an account to shop bespoke African and fitted fashion.</p>
+          <span class="btn" style="background-color: #fcf9f2; color: #1c2841;">Create Account</span>
+        </a>
+
+      </div>
+
+      <div class="fade-in-top" style="margin-top: 40px; animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards;">
+          <a href="index.html" style="color: #1c2841; text-decoration: none; font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; transition: color 0.2s;">
+              <i class="fas fa-arrow-left"></i> Continue to Store without signing in
+          </a>
+      </div>
+  </div>
+
+  <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

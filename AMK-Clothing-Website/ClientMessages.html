@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Tailor Support Chat</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+   <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html" data-translate="nav-logo">AMK CLOTHING</a>
+        </div>
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn" id="nav-signin-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="Cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="Wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="ClientMessages.html"><i class="fas fa-headset" style="color: #d96c06;"></i></a>
+                
+                <div class="nav-dropdown">
+                    <a href="#" class="globe-icon"><i class="fas fa-globe"></i></a>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <nav class="category-nav">
+        <a href="ClientWomen.html" data-translate="nav-women">Women</a>
+        <a href="ClientCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+                <a href="ClientTrack.html" data-translate="nav-traditional"> Track Orders</a>
+
+    </nav>
+
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column; height: 600px; border: 1px solid #eee;">
+            
+            <div style="background: #1c2841; padding: 20px 30px; border-bottom: 4px solid #d96c06;">
+                <h2 style="color: #ffffff; font-size: 1.4rem; margin: 0;">Tailor Support Chat</h2>
+                <p style="color: #a8dadc; font-size: 0.85rem; margin: 5px 0 0 0;">Discuss custom alterations, fittings, or order queries directly with our Johannesburg studio.</p>
+            </div>
+
+            <div id="chat-messages-container" style="flex: 1; background: #fcf9f2; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; padding: 20px;">
+                <p style="color: #777; text-align: center;">Loading conversation...</p>
+            </div>
+
+            <form id="chat-send-form" style="display: flex; gap: 10px; background: white; padding: 20px; border-top: 1px solid #eee;">
+                <input type="text" id="chat-input-text" placeholder="Type your message or custom alteration request here..." required style="flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-size: 0.95rem; background: #f4f7f6;">
+                <button type="submit" class="btn-primary" style="padding: 15px 30px; border-radius: 8px; cursor: pointer; font-size: 1rem; background: #d96c06; border: none; font-weight: bold; color: white;">Send</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

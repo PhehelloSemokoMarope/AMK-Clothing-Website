@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Your Wishlist</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html" data-translate="nav-logo">AMK CLOTHING</a>
+        </div>
+        
+        <div class="search-bar-dark">
+            <input type="text" placeholder="Search for dresses, suits, traditional attire...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <div class="nav-dropdown">
+                    <i class="fas fa-globe globe-icon" title="Language & Currency"></i>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="Wishlist.html" title="Wishlist"><i class="far fa-heart"></i><span id="wishlist-item-count" class="badge-count">0</span></a>
+                <a href="Cart.html" title="Cart"><i class="fas fa-shopping-cart"></i><span id="cart-item-count" class="badge-count">0</span></a>
+                <a href="ClientMessages.html" title="Support"><i class="fas fa-headset"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <a href="ClientWomen.html" data-translate="nav-women">Women</a>
+        <a href="ClientCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-custom" style="color: #d96c06; font-weight: 800;">Track Order</a>
+    </nav>
+
+    <main style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <div style="margin-bottom: 20px;">
+            <a href="index.html" style="color: #1c2841; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-arrow-left"></i> Back to Store
+            </a>
+        </div>
+
+        <h2 style="color: #1c2841; font-size: 2rem; margin-bottom: 20px; font-weight: 800;">My Wishlist</h2>
+        
+        <section id="wishlist-page-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+            <p style="text-align: center; color: #777; padding: 20px; grid-column: 1 / -1;">Loading wishlist...</p>
+        </section>
+    </main>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | AMK Clothing</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+        <div class="nav-icons-dark" style="margin-left: auto;">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="ClientTrack.html"><i class="fas fa-truck-fast"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="ClientPortal.html"><i class="fas fa-headset"></i></a>
+                
+                <div class="nav-dropdown">
+                    <a href="#" class="globe-icon"><i class="fas fa-globe"></i></a>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="category-nav">
+        <a href="ClientWomen.html" data-translate="nav-women">Women</a>
+        <a href="ClientCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAccessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+        <a href="ClientTrack.html" class="active" data-translate="nav-track">Track Orders</a>
+    </nav>
+
+    <main style="padding: 60px 20px; min-height: 60vh;">
+        <div class="track-container">
+            <div class="track-header">
+                <h1>Track Your Order</h1>
+                <p>Enter your order number (e.g., Order #01) or your full name to view live status and payment details.</p>
+            </div>
+
+            <div class="search-card">
+                <form id="track-order-form" class="search-form">
+                    <input type="text" id="track-order-input" class="search-input" placeholder="Enter Order # or Customer Name..." required>
+                    <button type="submit" class="track-btn"><i class="fas fa-search"></i> Track Order</button>
+                </form>
+            </div>
+
+            <div id="track-results-area" class="results-area">
+                <div class="empty-state">
+                    <p>Search for an order above to check its current stage in production.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="ClientWomen.html">Women</a>
+                <a href="ClientMen.html">Men</a>
+                <a href="ClientKids.html">Kids</a>
+                <a href="ClientCustom.html">Traditional Attire</a>
+                <a href="ClientAccessories.html">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="ClientTrack.html">Track Order</a>
+                <a href="ClientPortal.html">Shipping & Returns</a>
+                <a href="ClientPortal.html">Size Guide</a>
+                <a href="ClientPortal.html">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="ClientPortal.html">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

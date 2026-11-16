@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curve Collection | AMK Clothing</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html">AMK CLOTHING</a>
+        </div>
+        
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <a href="ClientTrack.html"><i class="fas fa-truck-fast"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="badge-count" id="cart-item-count">0</span></a>
+                <a href="wishlist.html"><i class="far fa-heart"></i><span class="badge-count" id="wishlist-item-count">0</span></a>
+                <a href="ClientPortal.html"><i class="fas fa-headset"></i></a>
+                
+                <div class="nav-dropdown">
+                    <a href="#" class="globe-icon"><i class="fas fa-globe"></i></a>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="category-nav">
+        <a href="ClientWomen.html" data-translate="nav-women">Women</a>
+        <a href="ClientCurve.html" class="active" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAccessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-traditional">Custom Orders</a>
+        <a href="ClientTrack.html" data-translate="nav-track">Track Orders</a>
+    </nav>
+
+    <main>
+        <h1 style="text-align: center; margin: 40px 0 20px; color: #1c2841; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 900;">Curve Collection</h1>
+        <p style="text-align: center; color: #777; margin-bottom: 40px; font-size: 1rem;">Beautifully tailored fits to celebrate every curve.</p>
+
+        <section style="padding: 0 5% 80px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                
+                <div class="product-card" style="min-width: 260px; max-width: 300px; flex: 1 1 calc(25% - 20px); border-radius: 12px; overflow: hidden; background: white; border: 1px solid #eee;">
+                    <div style="height: 320px; background: #f9f9f9;">
+                        <img src="Images/Outfit_Pics/Image (1).jpg" alt="Black Full Skirt Dress" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="font-size: 0.8rem; color: #777; font-weight: bold; text-transform: uppercase;">Curve</span>
+                        <h3 style="margin-top: 5px; color: #1c2841;">Black Full Skirt Dress</h3>
+                        <p class="dynamic-price" data-price-zar="2300" style="color: #d96c06; font-weight: 800; font-size: 1.2rem; margin: 10px 0;">R 2300.00</p>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <select class="cart-size-select" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="XL">XL (40)</option>
+                                <option value="2XL" selected>2XL (42)</option>
+                                <option value="3XL">3XL (44)</option>
+                            </select>
+                        </div>
+                        
+                        <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <input type="checkbox" class="enable-alteration-checkbox"> Custom Alteration?
+                        </label>
+                        <textarea class="alteration-notes-input" placeholder="Notes..." style="display: none; width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; resize: vertical;"></textarea>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="add-to-cart-btn" data-name="Black Full Skirt Dress" data-price="2300" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #1c2841; color: #fcd34d; font-weight: bold; cursor: pointer;">Add to Cart</button>
+                            <button class="add-to-wishlist-btn" data-name="Black Full Skirt Dress" data-price="2300" data-image="Images/Outfit_Pics/Image (1).jpg" style="padding: 12px; border: 1px solid #1c2841; border-radius: 8px; background: white; color: #1c2841; font-weight: bold; cursor: pointer;"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" style="min-width: 260px; max-width: 300px; flex: 1 1 calc(25% - 20px); border-radius: 12px; overflow: hidden; background: white; border: 1px solid #eee;">
+                    <div style="height: 320px; background: #f9f9f9;">
+                        <img src="Images/Outfit_Pics/Image (30).jpg" alt="Elegant Lace Gown" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="font-size: 0.8rem; color: #777; font-weight: bold; text-transform: uppercase;">Curve</span>
+                        <h3 style="margin-top: 5px; color: #1c2841;">Elegant Lace Gown</h3>
+                        <p class="dynamic-price" data-price-zar="2850" style="color: #d96c06; font-weight: 800; font-size: 1.2rem; margin: 10px 0;">R 2850.00</p>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <select class="cart-size-select" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="XL">XL (40)</option>
+                                <option value="2XL">2XL (42)</option>
+                                <option value="3XL" selected>3XL (44)</option>
+                            </select>
+                        </div>
+                        
+                        <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <input type="checkbox" class="enable-alteration-checkbox"> Custom Alteration?
+                        </label>
+                        <textarea class="alteration-notes-input" placeholder="Notes..." style="display: none; width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; resize: vertical;"></textarea>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="add-to-cart-btn" data-name="Elegant Lace Gown" data-price="2850" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #1c2841; color: #fcd34d; font-weight: bold; cursor: pointer;">Add to Cart</button>
+                            <button class="add-to-wishlist-btn" data-name="Elegant Lace Gown" data-price="2850" data-image="Images/Outfit_Pics/Image (30).jpg" style="padding: 12px; border: 1px solid #1c2841; border-radius: 8px; background: white; color: #1c2841; font-weight: bold; cursor: pointer;"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" style="min-width: 260px; max-width: 300px; flex: 1 1 calc(25% - 20px); border-radius: 12px; overflow: hidden; background: white; border: 1px solid #eee;">
+                    <div style="height: 320px; background: #f9f9f9;">
+                        <img src="Images/Outfit_Pics/Image (39).jpg" alt="Red Ruffle Dress" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="font-size: 0.8rem; color: #777; font-weight: bold; text-transform: uppercase;">Curve</span>
+                        <h3 style="margin-top: 5px; color: #1c2841;">Red Ruffle Dress</h3>
+                        <p class="dynamic-price" data-price-zar="2150" style="color: #d96c06; font-weight: 800; font-size: 1.2rem; margin: 10px 0;">R 2150.00</p>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <select class="cart-size-select" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="XL" selected>XL (40)</option>
+                                <option value="2XL">2XL (42)</option>
+                                <option value="3XL">3XL (44)</option>
+                            </select>
+                        </div>
+                        
+                        <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <input type="checkbox" class="enable-alteration-checkbox"> Custom Alteration?
+                        </label>
+                        <textarea class="alteration-notes-input" placeholder="Notes..." style="display: none; width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; resize: vertical;"></textarea>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="add-to-cart-btn" data-name="Red Ruffle Dress" data-price="2150" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #1c2841; color: #fcd34d; font-weight: bold; cursor: pointer;">Add to Cart</button>
+                            <button class="add-to-wishlist-btn" data-name="Red Ruffle Dress" data-price="2150" data-image="Images/Outfit_Pics/Image (39).jpg" style="padding: 12px; border: 1px solid #1c2841; border-radius: 8px; background: white; color: #1c2841; font-weight: bold; cursor: pointer;"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" style="min-width: 260px; max-width: 300px; flex: 1 1 calc(25% - 20px); border-radius: 12px; overflow: hidden; background: white; border: 1px solid #eee;">
+                    <div style="height: 320px; background: #f9f9f9;">
+                        <img src="Images/Outfit_Pics/Image (33).jpg" alt="Blue Statement Piece" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <span style="font-size: 0.8rem; color: #777; font-weight: bold; text-transform: uppercase;">Curve</span>
+                        <h3 style="margin-top: 5px; color: #1c2841;">Blue Statement Piece</h3>
+                        <p class="dynamic-price" data-price-zar="2600" style="color: #d96c06; font-weight: 800; font-size: 1.2rem; margin: 10px 0;">R 2600.00</p>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <select class="cart-size-select" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="XL">XL (40)</option>
+                                <option value="2XL" selected>2XL (42)</option>
+                                <option value="3XL">3XL (44)</option>
+                            </select>
+                        </div>
+                        
+                        <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <input type="checkbox" class="enable-alteration-checkbox"> Custom Alteration?
+                        </label>
+                        <textarea class="alteration-notes-input" placeholder="Notes..." style="display: none; width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; resize: vertical;"></textarea>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="add-to-cart-btn" data-name="Blue Statement Piece" data-price="2600" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #1c2841; color: #fcd34d; font-weight: bold; cursor: pointer;">Add to Cart</button>
+                            <button class="add-to-wishlist-btn" data-name="Blue Statement Piece" data-price="2600" data-image="Images/Outfit_Pics/Image (33).jpg" style="padding: 12px; border: 1px solid #1c2841; border-radius: 8px; background: white; color: #1c2841; font-weight: bold; cursor: pointer;"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="ecom-footer">
+        <div class="footer-columns">
+            <div class="footer-col">
+                <h4>AMK CLOTHING</h4>
+                <p>Bespoke African & Fitted Fashion crafted in Johannesburg.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="ClientWomen.html">Women</a>
+                <a href="ClientMen.html">Men</a>
+                <a href="ClientKids.html">Kids</a>
+                <a href="ClientCustom.html">Traditional Attire</a>
+                <a href="ClientAccessories.html">Accessories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="ClientTrack.html">Track Order</a>
+                <a href="ClientPortal.html">Shipping & Returns</a>
+                <a href="ClientPortal.html">Size Guide</a>
+                <a href="ClientPortal.html">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="ClientPortal.html">Contact Us</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 AMK Clothing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>

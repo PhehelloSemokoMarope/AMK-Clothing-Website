@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMK Clothing | Your Cart</title>
+    <link rel="stylesheet" href="Styling/StyleSheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="ecom-body">
+
+    <header class="ecom-header-dark">
+        <div class="logo">
+            <a href="index.html" data-translate="nav-logo">AMK CLOTHING</a>
+        </div>
+        
+
+        <div class="nav-icons-dark">
+            <div id="auth-header-container">
+                <a href="ClientSignIn.html" class="sign-in-btn">
+                    <i class="far fa-user"></i> Sign In
+                </a>
+            </div>
+            <div class="icon-group">
+                <div class="nav-dropdown">
+                    <i class="fas fa-globe globe-icon" title="Language & Currency"></i>
+                    <div class="nav-dropdown-content">
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Language</span>
+                            <a href="#" class="lang-btn" data-lang="en">English</a>
+                            <a href="#" class="lang-btn" data-lang="zu">isiZulu</a>
+                            <a href="#" class="lang-btn" data-lang="xh">isiXhosa</a>
+                            <a href="#" class="lang-btn" data-lang="st">Sesotho</a>
+                        </div>
+                        <div class="dropdown-group">
+                            <span class="dropdown-label">Currency</span>
+                            <a href="#" class="curr-btn" data-curr="zar">ZAR (R)</a>
+                            <a href="#" class="curr-btn" data-curr="usd">USD ($)</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="Wishlist.html" title="Wishlist"><i class="far fa-heart"></i><span id="wishlist-item-count" class="badge-count">0</span></a>
+                <a href="Cart.html" title="Cart"><i class="fas fa-shopping-cart"></i><span id="cart-item-count" class="badge-count">0</span></a>
+                <a href="ClientMessages.html" title="Support"><i class="fas fa-headset"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <a href="ClientWomen.html" data-translate="nav-women">Women</a>
+        <a href="ClientCurve.html" data-translate="nav-curve">Curve</a>
+        <a href="ClientKids.html" data-translate="nav-kids">Kids</a>
+        <a href="ClientMen.html" data-translate="nav-men">Men</a>
+        <a href="ClientAcessories.html" data-translate="nav-accessories">Accessories</a>
+        <a href="ClientCustom.html" data-translate="nav-custom" style="color: #d96c06; font-weight: 800;">Custom Order</a>
+           <a href="ClientTrack.html" data-translate="nav-traditional"> Track Orders</a>
+
+    </nav>
+
+    <main style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        <div style="margin-bottom: 20px;">
+            <a href="index.html" style="color: #1c2841; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fas fa-arrow-left"></i> Back to Store
+            </a>
+        </div>
+
+        <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h2 style="font-size: 1.8rem; color: #1c2841; margin-bottom: 20px; font-weight: 800;">Shopping Cart</h2>
+            
+            <div id="cart-page-items-container">
+                <p style="text-align: center; color: #777; padding: 20px;">Loading your cart...</p>
+            </div>
+
+            <div style="margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 1.2rem; font-weight: bold; color: #1c2841;">Total:</span>
+                <span id="cart-page-total" style="font-size: 1.5rem; font-weight: 800; color: #d96c06;">R 0.00</span>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h4 style="margin-bottom: 10px; color: #1c2841;">Select Payment Method:</h4>
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" value="eft" checked> EFT / Bank Transfer</label>
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" value="card"> Credit / Debit Card</label>
+                </div>
+                <button id="cart-page-checkout-btn" style="width: 100%; background: #d96c06; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.2s;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="Javascript/clientapp.js"></script>
+</body>
+</html>
